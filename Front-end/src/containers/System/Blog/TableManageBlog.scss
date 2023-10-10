@@ -1,0 +1,72 @@
+#TableManageBlog {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#TableManageBlog td, #TableManageBlog th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#TableManageBlog tr:nth-child(even){background-color: #f2f2f2;}
+
+#TableManageBlog tr:hover {background-color: #ddd;}
+
+#TableManageBlog th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #09a5c8;
+  color: white;
+}
+.btn-table-manage-blog{
+    display: flex;
+    justify-content: space-evenly;
+    .btn-edit{
+        width: 30px;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: #666;
+        &:hover{
+            background-color: transparent !important;
+            color: orange !important;
+        }
+    }
+    .btn-delete{
+        width: 50px;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: #666;
+        &:hover{
+            background-color: transparent !important;
+            color: rgb(235, 15, 15) !important;
+        }
+    }
+    .btn-change-status-blog{
+      border: none;
+      background: none;
+      .fa-eye{
+         border: none;
+         outline: none;
+         background: transparent;
+         color: #666;
+         &:hover{
+          background-color: transparent !important;
+          color: #000  !important;
+        }
+      }
+      .fa-eye-slash{
+         border: none;
+         outline: none;
+         background: transparent;
+         color: #666;
+         &:hover{
+          background-color: transparent !important;
+          color: #000 !important;
+        }
+      }
+    }
+}

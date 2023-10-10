@@ -1,0 +1,41 @@
+.detail-product{
+    .image-product{
+        .bg-image-nav{
+           
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-color: #eee;
+        }
+        .nav1{
+            width: 445px;
+            height: 445px ;
+        }
+        .nav2{
+            height: 100px;
+            width: 200px;
+            margin-top: 2rem;
+        }
+    }
+    .box-price-product{
+        display: flex;
+        gap: 1rem;
+        font-size: 20px;
+        margin-bottom: 5px;
+        .origin-price{
+            text-decoration: line-through;
+        }
+    }
+    .product_count{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        .quantity-product{
+            width: 30%;
+        }
+    }
+    .comment-product{
+        margin: 20px 0;
+    }
+}

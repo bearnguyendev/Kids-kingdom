@@ -1,0 +1,29 @@
+.voucher-page{
+   min-height: calc(100vh - 100px);
+    position: relative;
+   .logo-voucher-page{
+      height: 40rem;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-color: #eee;
+      background-image: url(../../assets/voucher/logo.webp);
+   }
+   .logo-my-voucher{
+      height: 15rem;
+      width: 100%;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-color: #eee;
+      background-image: url(../../assets/voucher/my-voucher.png.webp);
+   }
+   .list-voucher-page{
+         width: 100%;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: space-between;
+   }
+}

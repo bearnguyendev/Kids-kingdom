@@ -1,0 +1,251 @@
+.section-share{
+    &.section-top-product{
+        background: #f5f5f5;
+    }
+    &.section-about{
+        height: 500px !important;
+        border-top: 1px solid #e5e5e5;
+    }
+    &.section-blog{
+        height: 500px !important;
+        .section-container{
+            .section-body{
+                .slick-prev{
+                    top: 130px;
+                }                
+                .slick-next{
+                    top: 130px;
+                }                
+
+            }
+        }
+    }
+    .section-body{
+        .section-customize{
+            .bg-image{
+                width: 278px ;
+                height: 150px ;
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-color: #eee;
+                border: 1px solid #0de3d5;
+                &:hover{
+                    cursor: pointer;
+                }
+                &.section-top-product{
+                    //background-image: url(../../assets/outstanding-doctor/doctor1.jpg);
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 50%;
+                }
+            }
+        }
+       
+    }
+}
+
+.section-share{
+    height: 350px;
+    .section-container{
+        margin: 0 175px;
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        .section-header{
+            height: 60px;
+            margin-bottom: 30px;
+            padding-top: 30px;
+    
+            .title-section{
+                font-size: 22px;
+                font-weight: 600;
+            }
+            .btn-section{
+                float: right;
+                padding: 10px 15px;
+                border: none;
+                outline: none;
+                display: block;
+                background: #ebebeb;
+                color: black;
+                cursor: pointer;
+                text-transform: uppercase;
+    
+                &:hover{
+                    color: #fff;
+                    background: #0de3d5;
+                }
+            }
+        }
+    }
+}
+.section-top-product{
+    .outer-bg{
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 10px;
+    }
+    .section-customize{
+        padding: 5px;
+        .customize-border{
+            border: 1px solid #2fa4e4;
+            padding: 20px;
+            &:hover>.box-view-cart{
+                display: block;
+            }
+            &:hover>.top-product-name{
+                color: #2fa4e4;
+                cursor: pointer;
+            }
+            .box-view-cart{
+                padding: 2%;
+                display: none;
+                //background-color: #999;
+                //border:1px solid #2fa4e4;
+                border-radius: 5px;
+                text-align: center;
+                ion-icon{
+                    font-size: 22px;
+                }
+                i{
+                    font-size: 22px;
+                    color: #666;
+                    &:hover{
+                        color: #2fa4e4;
+                        cursor: pointer;
+                    }
+                }
+            }
+            .discount{
+                position: relative;
+                left: 23px;
+                bottom: 15px;
+                    .discount-percent{
+                        font-size: 15px;
+                        background: red;
+                        border-radius: 50%;
+                        height: 50px;
+                        width: 50px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: white;
+                        margin-right: 10px;
+                        text-shadow: 2px 2px 4px #000000;
+                    }
+            }
+            .top-product-name{
+                font-size: 13px;
+                height: 42px;
+            }
+            .top-product-price{
+                display: flex;
+                justify-content: space-between;
+                font-size: 14px;
+                .top-product-discount-price{
+                    color: red;
+                    font-weight: 600;
+                }
+                .top-product-original-price{
+                    text-decoration: line-through;
+                    color:#000000
+                }
+            }
+        }
+    }
+}
+.section-blog{
+    
+    .section-customize{
+        padding: 5px;
+        border-radius: 8px;
+        .customize-border{
+            border-radius: 3px;
+            &:hover{
+                cursor: pointer;
+                color: #2fa4e4;
+            }
+            .outer-bg{
+                display: flex;
+                margin-bottom: 10px;
+                .bg-image{
+                    height: 250px !important;
+                    width: 100% !important;
+                }
+            }
+            .blog-name{
+                height: 67px;
+                .title-blog-name{
+                    font-size: 15px;
+                    font-weight: 600;
+                    text-align: center;
+                }
+                .short-des-blog{
+                    word-wrap: break-word;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    width: 100%;
+                    overflow: hidden;
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+}
+.slick-prev{
+    left: -10px !important;
+    z-index: 998 !important;
+    height: 48px !important;
+    width: 44px !important;
+    background: #fff !important;
+    border: 2px solid #d7d7d7 !important;
+
+    &:hover{
+        background: #eceaea !important;
+    }
+}
+.slick-prev::before,
+.slick-next::before{
+    font-family: FontAwesome !important;
+    color: red !important;
+}
+.slick-next{
+    right: -15px !important;
+    z-index: 998 !important;
+    height: 48px !important;
+    width: 44px !important;
+    background: #fff !important;
+    border: 2px solid #d7d7d7 !important;
+
+    &:hover{
+        background: #eceaea !important;
+    }
+}
+.slick-disabled{
+    display: none !important;
+}
+.section-about{
+    padding: 0 175px;
+    .section-about-header{
+        padding: 20px 10px;
+        font-size: 22px;
+        font-weight: 600;
+    }
+    .section-about-content{
+        display: flex;
+        gap: 15px;
+        width: 100%;
+        .content-left{
+            width: 60%;
+        }
+        .content-right{
+            width: 40%;
+            p{
+                text-align: justify;
+                font-style: italic;
+                padding-top: 15px;
+            }
+        }
+    }
+}

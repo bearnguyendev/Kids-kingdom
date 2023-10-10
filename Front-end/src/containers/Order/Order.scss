@@ -1,0 +1,200 @@
+.order{
+    min-height: calc(100vh - 100px);
+    position: relative;
+    .horizontal-line{
+        margin-top: 10px;
+        height: 3px;
+        width: 100%;
+        background-position-x: -30px;
+        background-size: 116px 3px;
+        background-image: repeating-linear-gradient(45deg,#6fa6d6,#6fa6d6 33px,transparent 0,transparent 41px,#f18d9b 0,#f18d9b 74px,transparent 0,transparent 82px);
+    }
+    .address-order{
+        width: 100%;
+        .content-up{
+            display: flex;
+            justify-content: space-between;
+            .content-left{
+                font-weight: 600;
+                padding-bottom: 5px;
+                color: #0071ba;
+                font-size: 16px;
+            }
+            .content-right{
+                .receiver{
+                    background: #fff;
+                    border: 1px solid rgba(0,0,0,.09);
+                    box-shadow: 0 1px 1px 0 #999;
+                    border-radius: 2px!important;
+                    color: #555;
+                    text-transform: capitalize;
+                    outline: none;
+                    padding: 5px;
+                    cursor: pointer;
+                    &:hover{
+                        color: #56ccff; 
+                    }
+                }
+            }
+        }
+        .box-action{
+            .wrap-back{
+                button{
+                    margin-top: 5px;
+                    border: 1px solid #999;
+                    cursor: pointer;
+                    min-width: 5rem;
+                    border-radius: 3px;
+                    &:hover{
+                        color: white; 
+                        background-color: #56ccff;
+                    }
+                }
+            }
+        }
+        
+        .address{
+            display: flex;
+            &.active-change{
+                flex-direction: column;
+            }
+            .left{
+                width: 30%;
+                font-weight: 600;
+            }
+            .center{
+                width: 55%;
+            }
+            .right{
+                width: 15%;
+                .text-default{
+                    color: #999;
+                }
+                .text-change{
+                    color: #0071ba;
+                    cursor: pointer;
+                    opacity: 0.8;
+                    &:hover{
+                        color: #0071ba;
+                        font-weight: 600;
+                        opacity: 1;
+                    }
+                }
+            }
+            .form-check{
+                width: 85%;
+                .form-check-label{
+                    display: flex;
+                    width: 100%;
+                }
+            }
+        }
+    }
+    .product{
+        .table-striped{
+            .cart-detail-product{
+                display: flex;
+                width: 100%;
+                .cart-name-product{
+                    width: 85%;
+                    margin-left: 10px;
+                }
+                .cart-image-product{
+                    width: 15%;
+                    height: 60px;
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-color: #eee;
+                    border-radius: 3px;
+                    cursor: pointer;
+                }
+            }
+        }
+        .note-type-ship{
+            .all-type-ship{
+                .btn-type-ship{
+                    width: 10rem;
+                    text-align: center;
+                    opacity: 0.8;
+                    border-radius: 3px;
+                    &:hover{
+                        color: #56ccff;
+                        border:1px solid #56ccff;
+                        opacity: 1;
+                    }
+                    &.active{
+                        opacity: 1;
+                        color: rgb(7, 231, 52);
+                        border:1px solid rgb(7, 231, 52);
+                    }
+                }
+            }
+        }
+        .wrap-voucher{
+            display: flex;
+            align-items: center;
+            width: 100%;
+            .logo-my-voucher{
+                height: 3.5rem;
+                width: 22rem;
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-color: #eee;
+                background-image: url(../../assets/voucher/my-voucher.png.webp);
+            }
+            .choose-voucher{
+                margin-left: 10px;
+                font-size: 16px;
+                color: #0c56be;
+                font-weight: 500;
+                cursor: pointer;
+            }
+        }
+        .payment-methods{
+            .ship{
+                cursor: pointer;
+                &.active{
+                    border:1px solid rgb(7, 231, 52);
+                    color: rgb(7, 231, 52);
+                }
+                padding: 1%;
+                border-radius: 3px;
+            }
+            .payment-onl{
+                padding: 3%;
+                margin-left: 5rem;
+                .type-payment{
+                    cursor: pointer;
+                    &.active{
+                        border:1px solid rgb(231, 104, 7);
+                        color: rgb(231, 104, 7);
+                    }
+                    padding: 1%;
+                    border-radius: 3px;
+                }
+            }
+        }
+        .payment-cart{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            font-weight: 600;
+            .go-payment{
+                border: 1px solid #56ccff;
+                font-size: 20px;
+                padding: 1%;
+                margin-top: 3px;
+                border-radius: 3px;
+                cursor: pointer;
+                &:hover{
+                    box-shadow: 0 0 3px 0;
+                    background-color: #56ccff;
+                    color: #eee;
+                }
+            }
+        }
+        
+    }  
+}

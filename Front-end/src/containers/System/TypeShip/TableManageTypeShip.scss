@@ -1,0 +1,48 @@
+#TableManageTypeShip {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#TableManageTypeShip td, #TableManageTypeShip th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#TableManageTypeShip tr:nth-child(even){background-color: #f2f2f2;}
+
+#TableManageTypeShip tr:hover {background-color: #ddd;}
+
+#TableManageTypeShip th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #09a5c8;
+  color: white;
+}
+.btn-table-manage-type-ship{
+    display: flex;
+    justify-content: space-evenly;
+    .btn-edit{
+        width: 30px;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: #666;
+        &:hover{
+            background-color: transparent !important;
+            color: orange !important;
+        }
+    }
+    .btn-delete{
+        width: 50px;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: #666;
+        &:hover{
+            background-color: transparent !important;
+            color: rgb(235, 15, 15) !important;
+        }
+    }
+}

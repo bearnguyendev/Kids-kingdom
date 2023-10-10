@@ -1,0 +1,103 @@
+.home-footer-container{
+    margin: 5px 175px;
+    height: 350px;
+    //background-color: #666;
+    //color: #eee;
+    border-top: 1px solid #e5e5e5;
+    color: #666;
+    border-radius: 3px;
+    position: absolute;
+    .home-footer-content{
+        display: flex;
+        flex-direction: column;
+        .home-ft-up{
+            height: 320px;
+            display: flex;
+            padding: 10px 0;
+            .home-ft-title{
+                text-transform: uppercase;
+                font-weight: 600;
+                font-size: 17px;
+                padding-bottom: 10px;
+            }
+            .home-ft-des{
+                font-size: 14px;
+                padding-top: 20px;
+                &:hover{
+                    color: #45c3d2;
+                    opacity: 1;
+                    cursor: pointer;
+                }
+            }
+            .home-ft-1{
+                width: 25%;
+                padding: 0 10px;
+                .home-ft-name{
+                    text-transform: uppercase;
+                    font-weight: 600;
+                    font-size: 15px;
+                }
+                .home-ft-infor{
+                    &:hover{
+                        color: #45c3d2;
+                        opacity: 1;
+                        cursor: pointer;
+                    }
+                    .home-ft-icon{
+                        font-size: 2rem;
+                        color: #666;
+                        padding-right: 10px;
+                        cursor: pointer;
+                    }
+                }
+            }
+            .home-ft-2{
+                width: 25%;
+                padding: 0 10px;
+            }
+            .home-ft-3{
+                width: 25%;
+                padding: 0 10px;
+            }
+            .home-ft-4{
+                width: 25%;
+                padding: 0 10px;
+                .social-login{
+                    display: flex;
+                    text-align: center;
+                    justify-content: center;
+                    margin-top: 10px;
+                    .google{
+                        font-size: 30px;
+                        background: rgb(224, 50, 50);
+                        border-radius: 50%;
+                        height: 50px;
+                        width: 50px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: white;
+                        margin-right: 10px;
+                        cursor: pointer;
+                    }
+                    .facebook{
+                        font-size: 30px;
+                        background: #307aaf;
+                        border-radius: 50%;
+                        height: 50px;
+                        width: 50px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: white;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+        .home-ft-down{
+            position: absolute;
+            width: 100%;
+        }
+    }
+}

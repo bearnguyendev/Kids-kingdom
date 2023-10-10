@@ -1,0 +1,44 @@
+.home-header-container{
+    margin-top: 60px;
+    padding: 0 40px;
+    padding-bottom: 40px;
+    .home-header-content{
+        background-image: linear-gradient(rgba(255, 255, 255, 0.1),rgba(255, 255, 255, 0.9),rgba(255, 255, 255, 1));
+        .options{
+            text-align: center;
+            display: flex;
+            justify-content: space-around;
+            grid-gap:50px;
+            .option-child{
+                width: 125px;
+                
+                .icon-child{
+                    background: white;
+                    width: 40px;
+                    height: 40px;
+                    padding: 10px;
+                    border-radius: 50%;
+                    text-align: center;
+                    margin: 0 auto;
+                    i{
+                        color: #666;
+                        font-size: 4rem;
+                    }
+                    .icon{
+                        position: relative;
+                        left: -15px;
+                    }
+                }
+                .text-child{
+                    font-size: 17px;
+                    font-weight: 500;
+                    margin-top: 40px;
+                    cursor: pointer;
+                    &:hover{
+                        color: #49bce2;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,18 @@
+.modal-voucher-container{
+    .modal-voucher-body{
+        .btn-search{
+            background: rgba(0,0,0,.1);
+            outline: none;
+            color: #fff;
+            border-radius: .125rem;
+            box-shadow: 0 1px 1px 0 rgba(0, 0, 0,0.09);
+            width: 6.25rem;
+            height: 2.75rem;
+            border: none;
+            margin-left: 10px;
+            &.active{
+                background:#56ccff;
+            }
+        }
+    }
+}
