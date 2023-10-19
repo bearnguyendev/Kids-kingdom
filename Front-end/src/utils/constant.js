@@ -2,6 +2,7 @@ export const path = {
     HOME: '/',
     HOMEPAGE: '/home',
     LOGIN: '/login',
+    LOGIN_GOOGLE: 'api/auth/google',
     FORGOT_PASSWORD: '/forgot-password',
     RESET_PASSWORD: '/reset-password',
     VERIFY_EMAIL: "/verify-email",
@@ -41,6 +42,7 @@ export const path = {
     ORDER_USER: "/user/order/:id",
     DETAIL_ORDER_USER: "/user/detail-order/:id",
     CHANGE_PASSWORD_USER: '/user/change-password/:id',
+    REVIEW_ORDER_USER: "/user/review-order/:id&:userId"
 
 };
 

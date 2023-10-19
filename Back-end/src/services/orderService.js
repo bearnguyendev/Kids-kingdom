@@ -8,9 +8,9 @@ const vnpay = require('vn-payments');
 import initiatePayment from "./MomoPayMent"
 //const vnpay = require('vnpay');
 paypal.configure({
-    'mode': 'sandbox', //sandbox or live
-    'client_id': 'Aae08JhLTsu3TfUXSNpTgccNk5y89iXoKT3la1uNX5BxRrEeMWOIyg3wnDYeoeX8I5TJZl27bd0U6eKS',
-    'client_secret': 'EO7WultyeOU6vXSyVgiUAUDHP2WF7GghDkqb_T5PQkuootZ3OItqbADgdCczftVoFtZRk98qGCUmSiQY'
+    'mode': process.env.PAYPAL_MODE, //sandbox or live
+    'client_id': process.env.PAYPAL_CLIENT_ID,
+    'client_secret': process.env.PAYPAL_CLIENT_SECRET
 });
 let createNewOrder = (data) => {
     return new Promise(async (resolve, reject) => {
@@ -579,25 +579,6 @@ let paymentPayPalSuccess = (data) => {
                         // })
                     }
                 });
-
-
-                //     const { partnerRefId, momoTransId } = req.body;
-
-                //     // Kiểm tra trạng thái thanh toán
-                //     const paymentStatusRequest = momo.createPaymentStatusRequest(hostname, partnerRefId, momoTransId);
-                //     const response = await momo.sendPaymentStatusRequest(paymentStatusRequest, partnerCode, accessKey, secretKey);
-
-                //     // Trả về response cho client
-                //     res.json(response);
-                //   } catch (error) {
-                //     console.error('Error:', error.message);
-                //     res.status(500).json({ error: 'Internal server error' });
-                //   }
-
-
-
-
-
             }
         } catch (error) {
             reject(error)

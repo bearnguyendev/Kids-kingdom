@@ -90,35 +90,52 @@ class ManageImport extends Component {
                 return;
             }
             let { action, quantity, priceImport, productId } = this.state
-            if (action === CRUD_ACTIONS.CREATE) {
-                // fire redux create 
-                let res = await createNewImportService({
-                    quantity,
-                    priceImport,
-                    productId
+            if (quantity <= 0) {
+                toast.error(<FormattedMessage id={"manage-import.err-quantity"} />)
+                this.setState({
+                    quantity: ''
                 })
-                if (res && res.errCode === 0) {
-                    toast.success(<FormattedMessage id={"manage-import.success"} />);
-                    this.props.fetchAllImports();
-                } else {
-                    toast.error(res.errMessage)
+            } else {
+                if (action === CRUD_ACTIONS.CREATE) {
+                    // fire redux create 
+                    let res = await createNewImportService({
+                        quantity,
+                        priceImport,
+                        productId
+                    })
+                    if (res && res.errCode === 0) {
+                        toast.success(<FormattedMessage id={"manage-import.success"} />);
+                        this.props.fetchAllImports();
+                    } else {
+                        toast.error(res.errMessage)
+                    }
+                }
+                if (action === CRUD_ACTIONS.EDIT) {
+                    // fire redux edit 
+                    let res = await editImportService({
+                        id: this.state.editId,
+                        quantity,
+                        priceImport,
+                        productId,
+                    })
+                    if (res && res.errCode === 0) {
+                        toast.success(<FormattedMessage id={"manage-import.update"} />);
+                        this.props.fetchAllImports();
+                        this.setState({
+                            productId: '',
+                            priceImport: '',
+                            quantity: '',
+                            action: '',
+                            selectedProduct: '',
+                            dataProduct: '',
+                            nameProduct: '',
+                        })
+                    } else {
+                        toast.error(res.errMessage)
+                    }
                 }
             }
-            if (action === CRUD_ACTIONS.EDIT) {
-                // fire redux edit 
-                let res = await editImportService({
-                    id: this.state.editId,
-                    quantity,
-                    priceImport,
-                    productId,
-                })
-                if (res && res.errCode === 0) {
-                    toast.success(<FormattedMessage id={"manage-import.update"} />);
-                    this.props.fetchAllImports();
-                } else {
-                    toast.error(res.errMessage)
-                }
-            }
+
         } catch (error) {
             toast.error(<FormattedMessage id={"error"} />)
         }

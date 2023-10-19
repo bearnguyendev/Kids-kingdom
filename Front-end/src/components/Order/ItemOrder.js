@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-class HeadingOrder extends Component {
+class ItemOrder extends Component {
 
     constructor(props) {
         super(props);
@@ -21,6 +21,7 @@ class HeadingOrder extends Component {
             this.props.history.push(`/home`)
         }
     }
+
     render() {
         let { dataOrder, sumCart, isOrderUser, isExport } = this.props
         return (
@@ -110,4 +111,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HeadingOrder));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ItemOrder));

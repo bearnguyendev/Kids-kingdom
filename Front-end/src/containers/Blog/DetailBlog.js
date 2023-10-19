@@ -56,7 +56,7 @@ class DetailBlog extends Component {
                             <p className='img-detail-blog' style={{ backgroundImage: `url(${dataBlog.image})` }}></p>
                             <div className='description-detail-blog' dangerouslySetInnerHTML={{ __html: dataBlog.contentHTML && dataBlog.contentHTML }}></div>
                         </div>
-                        <div className='comment-doctor'>
+                        <div className='comment-box'>
                             <Comment
                                 dataHref={currentURL}
                                 width={"100%"}

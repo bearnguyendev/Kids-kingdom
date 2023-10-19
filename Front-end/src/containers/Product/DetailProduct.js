@@ -15,6 +15,7 @@ import img from "../../assets/images/Product/icon-chinh-hang.png"
 import CommentProduct from './CommentProduct';
 import LikeAndShare from '../../components/SocialPlugin/LikeAndShare';
 import { toast } from 'react-toastify';
+import Comment from '../../components/SocialPlugin/Comment';
 class DetailProduct extends Component {
 
     constructor(props) {
@@ -26,10 +27,15 @@ class DetailProduct extends Component {
             nav2: null,
             arrAges: [],
             status: '',
+            dataOrder: ''
         }
     }
     async componentDidMount() {
         window.scrollTo(0, 0)
+        let { userInfo } = this.props;
+        if (userInfo && userInfo.id) {
+            await this.props.getAllOrderByUserIdRedux(userInfo.id)
+        }
         this.props.fetchAllcodeAgeUseProduct()
         if (this.props.match && this.props.match.params && this.props.match.params.id) {
             let productId = this.props.match.params.id
@@ -62,6 +68,11 @@ class DetailProduct extends Component {
         if (prevState.dataProduct !== this.state.dataProduct) {
             let { listAges } = this.props
             this.buildDateAge(listAges, this.state.dataProduct)
+        }
+        if (prevProps.ordersOfUserRedux !== this.props.ordersOfUserRedux) {
+            this.setState({
+                dataOrder: this.props.ordersOfUserRedux
+            })
         }
     }
     buildDateAge = (listAges, dataProduct) => {
@@ -112,8 +123,7 @@ class DetailProduct extends Component {
         })
     }
     render() {
-        let { dataProduct, quantityProduct, isOpen, previewImgURL, arrAges, status } = this.state
-        console.log("check dataProduct: ", dataProduct);
+        let { dataProduct, quantityProduct, isOpen, previewImgURL, arrAges, status, dataOrder } = this.state
         let currentURL = +process.env.REACT_APP_IS_LOCALHOST === 1 ? "https://bearnguyen-restaurant-bot-tv.herokuapp.com/" : window.location.href;
         arrAges = arrAges && arrAges.length > 0 && arrAges.filter(item => item.status === 1)
         return (
@@ -289,9 +299,16 @@ class DetailProduct extends Component {
                             userInfo={this.props.userInfo}
                             productId={this.props.match && this.props.match.params && this.props.match.params.id}
                             dataCommentProduct={this.props.dataCommentProduct}
+                            dataOrder={dataOrder}
                         />
                     </div>
                     {/* BINH LUAN SAN PHAM  : END*/}
+                    <div className='comment-box'>
+                        <Comment
+                            dataHref={currentURL}
+                            width={"100%"}
+                        />
+                    </div>
                 </div>
                 {
                     isOpen === true &&
@@ -312,6 +329,7 @@ const mapStateToProps = state => {
         userInfo: state.user.userInfo,
         dataCommentProduct: state.admin.commentProduct,
         listAges: state.admin.ageUseProducts,
+        ordersOfUserRedux: state.admin.ordersOfUser,
     };
 };
 
@@ -320,6 +338,7 @@ const mapDispatchToProps = dispatch => {
         fetchAddItemCart: (data) => dispatch(actions.fetchAddItemCart(data)),
         fetchAllCommentByProductIdRedux: (id) => dispatch(actions.fetchAllCommentByProductId(id)),
         fetchAllcodeAgeUseProduct: () => dispatch(actions.fetchAllcodeAgeUseProduct()),
+        getAllOrderByUserIdRedux: (userId) => dispatch(actions.fetchAllOrderByUserId(userId)),
     };
 };
 

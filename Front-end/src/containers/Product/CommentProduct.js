@@ -23,10 +23,12 @@ class CommentProduct extends Component {
             isOpen: false,
             isOpenModal: false,
             parentId: '',
-            previewImgSendComment: ''
+            previewImgSendComment: '',
+            dataOrder: ''
         }
     }
-    componentDidMount() {
+    async componentDidMount() {
+
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.dataCommentProduct !== this.props.dataCommentProduct) {
@@ -166,7 +168,8 @@ class CommentProduct extends Component {
 
     render() {
         let { activeStar, previewImgURL, content, dataComment, countStar, isOpen, isOpenModal, previewImgSendComment } = this.state
-        let { userInfo } = this.props
+        let { userInfo, dataOrder, productId } = this.props
+        console.log("check props : ", this.props);
         return (
             <div className="row">
                 <div className="col-lg-12">
@@ -217,7 +220,8 @@ class CommentProduct extends Component {
                         </div>
                     </div>
                     <div className="review_list">
-                        {userInfo &&
+                        {/* {
+                            userInfo &&
                             <div className="review_item">
                                 <div className="form-group">
                                     <label style={{ color: '#333', fontSize: '16px', fontWeight: '600' }}>Viết đánh giá của bạn</label>
@@ -242,7 +246,7 @@ class CommentProduct extends Component {
                                 <div style={{ backgroundImage: `url(${previewImgSendComment})` }} className="preview-cmt-img">
                                 </div>
                             </div>
-                        }
+                        } */}
                         <div className='item-comment'>
                             {dataComment && dataComment.length > 0 &&
                                 dataComment.map((item, index) => {
@@ -312,6 +316,7 @@ class CommentProduct extends Component {
                         onCloseRequest={() => this.setState({ isOpen: false })}
                     />
                 }
+                <div className='text-lg font-weight-bold font-italic'>Bình luận qua facebook</div>
                 <CommentModal
                     isOpen={isOpenModal}
                     toggleFromParent={this.toggleCommentModal}
@@ -330,7 +335,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchAllCommentByProductIdRedux: (id) => dispatch(actions.fetchAllCommentByProductId(id))
+        fetchAllCommentByProductIdRedux: (id) => dispatch(actions.fetchAllCommentByProductId(id)),
     };
 };
 

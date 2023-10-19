@@ -14,6 +14,7 @@ import AvatarUser from '../containers/User/AvatarUser';
 import "../containers/User/DetailUserPage.scss"
 import ChangePasswordUser from '../containers/User/ChangePasswordUser';
 import OrderUserDetail from '../containers/User/OrderUserDetail';
+import ReviewOrderUser from '../containers/User/ReviewOrderUser';
 
 class User extends Component {
     constructor(props) {
@@ -50,7 +51,7 @@ class User extends Component {
                                 <Route exact path={path.VOUCHER_USER} ><VoucherUser userId={userInfo.id} showAvatar={this.showAvatar} /></Route>
                                 <Route exact path={path.ADDRESS_USER} ><AddressUser userId={userInfo.id} showAvatar={this.showAvatar} /></Route>
                                 <Route exact path={path.ORDER_USER} ><OrderUser userId={userInfo.id} hideAvatar={this.hideAvatar} /></Route>
-                                <Route exact path={path.CHANGE_PASSWORD_USER} ><ChangePasswordUser showAvatar={this.showAvatar} /></Route>
+                                <Route exact path={path.CHANGE_PASSWORD_USER} ><ChangePasswordUser showAvatar={this.showAvatar} userId={userInfo.id} /></Route>
                                 <Route exact path={path.DETAIL_ORDER_USER} ><OrderUserDetail userId={userInfo.id} hideAvatar={this.hideAvatar} /></Route>
                                 <Route component={() => { return (<Redirect to={path.HOMEPAGE} />) }} />
                             </Switch>

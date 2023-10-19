@@ -631,6 +631,35 @@ let changeStatusUser = (data) => {
         }
     })
 }
+let upsertUserSocialMedia = (typeAcc, data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let user = null
+            if (typeAcc === 'GOOGLE') {
+                const [res, created] = await db.User.findOrCreate({
+                    where: {
+                        email: data.email,
+                        type: typeAcc
+                    },
+                    defaults: {
+                        email: data.email,
+                        lastName: data.userName,
+                        type: typeAcc
+                    }
+                })
+                user = res
+                console.log("check user: ", user);
+                // resolve({
+                //     errCode: 0,
+                //     user
+                // })
+
+            }
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
 module.exports = {
     createANewUser: createANewUser,
     getAllUsers: getAllUsers,

@@ -286,7 +286,7 @@
             background-color: #fffefb;
             display: flex;
             justify-content: space-between;
-            padding: 20px 40px;
+            padding: 5rem 20px;
             .wrap-bottom{
                 color: #0000008a;
                 
@@ -333,6 +333,10 @@
                 }
                }
             }
+        }
+        .content-cmt{
+            text-align: center;
+            padding: 1rem 0;
         }
     }
 }

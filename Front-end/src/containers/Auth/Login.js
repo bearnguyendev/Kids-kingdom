@@ -4,7 +4,7 @@ import { push } from "connected-react-router";
 import * as actions from "../../store/actions";
 import "./Login.scss";
 
-import { handleLogin } from "../../services/userService"
+import { handleLogin, handleLoginWithGoogle } from "../../services/userService"
 import { KeyCodeUtils } from "../../utils";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
@@ -65,6 +65,18 @@ class Login extends Component {
         if (keyCode === KeyCodeUtils.ENTER) {
             this.handleLogin()
         }
+    }
+    handleLoginWithGoogle = async () => {
+        try {
+            let res = await handleLoginWithGoogle()
+            console.log("resss: ", res);
+            // if (res) {
+            //     window.location.href = res.data.redirectUrl;
+            // }
+        } catch (error) {
+            console.error(error);
+        }
+
     }
     render() {
         return (
@@ -133,7 +145,11 @@ class Login extends Component {
                                 </span>
                             </div>
                             <div className="col-12 social-login">
-                                <i className="fab fa-google-plus-g google"></i>
+                                <a>
+                                    <i className="fab fa-google-plus-g google"
+                                        onClick={() => this.handleLoginWithGoogle()}
+                                    ></i>
+                                </a>
                                 <i className="fab fa-facebook-f facebook"></i>
                             </div>
                         </div>

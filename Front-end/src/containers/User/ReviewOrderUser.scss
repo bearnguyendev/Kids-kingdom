@@ -1,0 +1,90 @@
+.review-container{
+    min-height: 35vh !important;
+    margin: 5px 250px;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    .select-product{
+        width: 40%;
+        margin-bottom: 3rem;
+    }
+    .review_item{
+        .content-review{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .content-left{
+                display: flex;
+                align-items: center;
+                .fa-camera{
+                    font-size: 20px;
+                    color: #929292;
+                    margin-right: 10px;
+                    &:hover{
+                        color: #333;
+                        cursor: pointer;
+                    }
+                }
+                .box-star{
+                    padding: 6px 20px;
+                    border: 1px solid #00000017;
+                    color: #333;
+                    font-size: 16px;
+                    margin-left: 8px;
+                    
+                    text-align: center;
+        
+                    .fa-star{
+                        color: #929292;
+                        font-size: 14px;
+                        
+                    }
+                    &:hover{
+                        cursor: pointer;
+                        color: #EE4D2D ;
+                        color: #e2da18 !important;
+                        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+                        border-color: #e2da18 !important;
+                        .fa-star{
+                            color: #e2da18;
+                        }
+                    }
+                    &.active{
+                        color: #e2da18 !important;
+                        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+                        border-color: #e2da18 !important;
+                        .fa-star{
+                            color: #e2da18;
+                        }
+                    }
+                }
+            }
+            .content-right{
+                font-size: 14px;
+                
+                .btn{
+                    font-size: 14px;
+                   
+                }
+                .btn-primary{
+                    background-color: #337ab7 !important;
+                    border-color: #2e6da4 !important;
+                    &:hover{
+                        background-color: #286090 !important;
+                        border-color: #204d74 !important;
+                    }
+                    
+                }
+            }
+        }
+        .preview-cmt-img{
+            background: no-repeat center center;
+            background-size: contain;
+            width: 180px;
+            height: 90px;
+            margin: 20px 0;
+            // height: 100px !important;
+            // width: 180px;
+            cursor: pointer !important;
+        }
+    }
+}

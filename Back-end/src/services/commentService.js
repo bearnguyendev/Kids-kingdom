@@ -20,12 +20,12 @@ let createNewComment = (data) => {
                 if (res) {
                     resolve({
                         errCode: 0,
-                        errMessage: 'Bình luận thành công!'
+                        errMessage: 'Đánh giá thành công!'
                     })
                 } else {
                     resolve({
                         errCode: 0,
-                        errMessage: 'Bình luận thất bại!'
+                        errMessage: 'Đánh giá thất bại!'
                     })
                 }
             }

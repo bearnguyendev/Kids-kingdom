@@ -281,10 +281,11 @@
         "edit-import":"Cập nhật phiếu nhập",
         "edit":"Cập nhật",
         "name": "Tên sản phẩm",
-        "date": "Ngày nhập"
+        "date": "Ngày nhập",
+        "err-quantity": "Số lượng nhập hàng tối thiểu là 1"
     },
     "home-page":{
-        "about": "Truyền thông nói về KisKingdom",
+        "about": "Truyền thông nói về KidsKingdom",
         "top-product": "Sản phẩm nổi bật",
         "new-product": "Sản phẩm mới",
         "blog": "Bài đăng",
@@ -346,7 +347,8 @@
         "no-voucher": "Không sử dụng mã giảm giá",
         "paid": "Đã thanh toán Online",
         "unpaid": "Thanh toán khi nhận hàng",
-        "payment-momo": "Thanh toán Momo"
+        "payment-momo": "Thanh toán Momo",
+        "write-cmt": "Viết đánh giá của bạn"
     },
     "voucher":{
         "choose-voucher": "Chọn mã giảm giá",

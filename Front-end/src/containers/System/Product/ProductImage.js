@@ -167,7 +167,6 @@ class ProductImage extends Component {
     }
     render() {
         let { arrProductImage, action, previewImgURL, id, image, title } = this.state
-        console.log("check state:", this.state);
         return (
             <>
                 <div className='container pt-5'>

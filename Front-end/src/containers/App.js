@@ -33,6 +33,7 @@ import ListBlogs from './Blog/ListBlogs';
 import ActiveEmail from './User/ActiveEmail';
 import PaymentSuccess from './User/PaymentSuccess';
 import PaymentFrom from './Order/PaymentFrom';
+import ReviewOrderUser from './User/ReviewOrderUser';
 
 
 class App extends Component {
@@ -79,6 +80,7 @@ class App extends Component {
                                     <Route path={path.BLOG} component={ListBlogs} />
                                     <Route path={path.DETAIL_BLOG} component={DetailBlog} />
                                     <Route path={path.PAYMENT_SUCCESS} component={userIsAuthenticated(PaymentSuccess)} />
+                                    <Route path={path.REVIEW_ORDER_USER} component={userIsAuthenticated(ReviewOrderUser)} />
                                     <Route path={path.PAYMENT_FROM} component={userIsAuthenticated(PaymentFrom)} />
                                     <Route path={path.USER} component={userIsAuthenticated(User)} />
                                     <Route component={() => { return (<Redirect to={path.HOME} />) }} />

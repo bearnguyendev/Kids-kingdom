@@ -50,6 +50,7 @@ class OrderUserDetail extends Component {
                         dataOrder={dataOrder}
                         sumCart={sumCart}
                         isOrderUser={true}
+                        userId={this.props.userId}
                     />
                     <PaymentOrder
                         dataOrder={dataOrder}

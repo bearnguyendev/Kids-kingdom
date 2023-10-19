@@ -238,6 +238,7 @@ class Order extends Component {
                                         userId: userId,
                                         arrDataCart: result,
                                         totalPayment: totalPriceDiscount,
+                                        requestId: `ID-${orderId}`
                                     }))
                                     window.location.href = res.res.payUrl
                                     console.log("check res: ", res.res.payUrl);

@@ -27,6 +27,7 @@ class ActiveEmail extends Component {
             let paymentId = urlParams.get('paymentId');
             let token = urlParams.get('token');
             let message = urlParams.get('message');
+            let requestIdMomo = urlParams.get('requestId');
             // if (dataItemOfCartRedux.ProductUserCartData.length > 0) {
             //     let result = [];
             //     dataItemOfCartRedux.ProductUserCartData.map((item, index) => {
@@ -50,10 +51,12 @@ class ActiveEmail extends Component {
             // }
             let orderData = JSON.parse(localStorage.getItem("orderData"))
             let totalUSD = orderData.totalPaymentUSD
+            let { requestId } = orderData
             delete orderData.totalPaymentUSD
+            delete orderData.requestId
             localStorage.removeItem("orderData")
             var res = ''
-            if (message && message === "Success") {
+            if (message && message === "Success" && requestId && requestId === requestIdMomo) {
                 res = await createNewOrderService(orderData)
             } else {
                 res = await paymentPayPalSuccessService({
