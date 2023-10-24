@@ -31,6 +31,7 @@ class ManageProduct extends Component {
             dataAgesItem: '',
             shortDes: '',
             nameDetail: '',
+            long: '',
             width: '',
             height: '',
             weight: '',
@@ -57,17 +58,31 @@ class ManageProduct extends Component {
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
         window.scrollTo(0, 0);
+        let arrCheck = ['long', 'width', 'height', 'weight', 'originalPrice']
+        for (let i = 0; i < arrCheck.length; i++) {
+            if (prevState[arrCheck[i]] !== this.state[arrCheck[i]]) {
+                if (this.state[arrCheck[i]] < 0) {
+                    this.setState({
+                        [arrCheck[i]]: 1
+                    })
+                } else if (this.state[arrCheck[i]] == 0) {
+                    this.setState({
+                        [arrCheck[i]]: ""
+                    })
+                }
+            }
+        }
         if (prevState.percentDiscount !== this.state.percentDiscount || prevState.originalPrice !== this.state.originalPrice) {
             let { originalPrice, percentDiscount } = this.state;
             let discountPrice = originalPrice - (originalPrice * percentDiscount / 100)
-            if (discountPrice < 0 || discountPrice > originalPrice) {
-                alert(`Phần trăm giảm giá bạn vừa nhập là ${percentDiscount}% không hợp lệ!`);
+            if (percentDiscount < 0 || percentDiscount > 100 || discountPrice > originalPrice) {
+                toast.error(`Phần trăm giảm giá bạn vừa nhập là ${percentDiscount}% không hợp lệ!`);
                 this.setState({
                     percentDiscount: '',
                 })
             }
             this.setState({
-                discountPrice: discountPrice
+                discountPrice: discountPrice ? discountPrice : 0
             })
         }
         if (prevProps.listCategory !== this.props.listCategory) {
@@ -152,7 +167,22 @@ class ManageProduct extends Component {
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
-                alert('Đây là trường bắt buộc: ' + arrCheck[i])
+                toast.error('Đây là trường bắt buộc: ' + arrCheck[i])
+                break;
+            }
+        }
+        return isValid;
+    }
+    checkNumberInput = () => {
+        let isValid = true
+        let arrCheck = ['long', 'width', 'height', 'weight', 'originalPrice', 'percentDiscount']
+        for (let i = 0; i < arrCheck.length; i++) {
+            if (this.state[arrCheck[i]] <= 0) {
+                isValid = false;
+                //toast.error('Dữ liệu số nhập vào không được âm: ' + arrCheck[i]);
+                this.setState({
+                    [arrCheck[i]]: 0
+                })
                 break;
             }
         }
@@ -234,6 +264,10 @@ class ManageProduct extends Component {
         try {
             let isValid = this.checkValidateInput()
             if (isValid === false) {
+                return;
+            }
+            let isValidNumber = this.checkNumberInput()
+            if (isValidNumber === false) {
                 return;
             }
             let { action, dataAgesItem, arrAges } = this.state
@@ -415,6 +449,7 @@ class ManageProduct extends Component {
                                     {arrCategory && arrCategory.length > 0 &&
                                         arrCategory.map((item, index) => {
                                             return (
+                                                item.status === 0 &&
                                                 <option key={index} value={item.keyMap}>{item.value}</option>
                                             )
                                         })}
@@ -429,6 +464,7 @@ class ManageProduct extends Component {
                                     {arrBrands && arrBrands.length > 0 &&
                                         arrBrands.map((item, index) => {
                                             return (
+                                                item.status === 0 &&
                                                 <option key={index} value={item.keyMap}>{item.value}</option>
                                             )
                                         })}

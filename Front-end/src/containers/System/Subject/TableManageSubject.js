@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './TableManageSubject.scss'
 import * as actions from '../../../store/actions';
-import { deleteAllCodeService } from '../../../services/userService';
+import { deleteAllCodeService, handleChangeStatusAllcode } from '../../../services/userService';
 import { toast } from 'react-toastify';
 
 class TableManageSubject extends Component {
@@ -27,7 +27,11 @@ class TableManageSubject extends Component {
     }
     handleDeleteSubject = async (id) => {
         try {
-            let res = await deleteAllCodeService(id);
+            let data = {
+                id: id,
+                type: "SUBJECT"
+            }
+            let res = await deleteAllCodeService(data);
             if (res && res.errCode === 0) {
                 toast.success(res.errMessage);
                 this.props.fetchAllcodeSubjects();
@@ -42,6 +46,31 @@ class TableManageSubject extends Component {
     handleEditSubject = (subject) => {
         this.props.handleEditSubjectFromParentKey(subject)
     }
+    handleChangeStatus = async (subject, type) => {
+        try {
+            await handleChangeStatusAllcode({
+                id: subject.id,
+                type: type
+            })
+            if (type === 'BAN') {
+                toast.success(`Ẩn chủ đề ${subject.value} thành công!`)
+                this.props.fetchAllcodeSubjects();
+            }
+            if (type === 'PERMIT') {
+                toast.success(`Hiện chủ đề ${subject.value} thành công!`)
+                this.props.fetchAllcodeSubjects();
+            }
+        } catch (error) {
+            if (error.response) {
+                if (error.response.data) {
+                    this.setState({
+                        errMessage: error.response.data.message
+                    })
+                }
+            }
+            toast.error("Thao tác thất bại! Vui lòng thử lại sau.")
+        }
+    }
     render() {
         let { arrSubjects } = this.state
         return (
@@ -52,6 +81,7 @@ class TableManageSubject extends Component {
                             <th>STT</th>
                             <th>Mã chủ đề</th>
                             <th>Tên chủ đề</th>
+                            <th>Trạng thái</th>
                             <th>Hành động</th>
                         </tr>
                         {arrSubjects && arrSubjects.length > 0 &&
@@ -61,6 +91,7 @@ class TableManageSubject extends Component {
                                         <td>{index + 1}</td>
                                         <td>{item.keyMap}</td>
                                         <td>{item.value}</td>
+                                        <td>{item.status === 0 ? "Hiện" : "Ẩn"}</td>
                                         <td>
                                             <div className='btn-table-manage-subject'>
                                                 <button
@@ -73,7 +104,23 @@ class TableManageSubject extends Component {
                                                     onClick={() => this.handleDeleteSubject(item.id)}
                                                     title="Xoá"
                                                 ><i className="fas fa-trash"></i></button>
+                                                {item.status === 0 ?
+                                                    <button
+                                                        className='btn-change-status-blog'
+                                                        onClick={() => this.handleChangeStatus(item, "BAN")}
+                                                    >
+                                                        <i className='far fa-eye-slash' title='Ẩn chủ đề'></i>
+                                                    </button>
+                                                    :
+                                                    <button
+                                                        className='btn-change-status-blog'
+                                                        onClick={() => this.handleChangeStatus(item, "PERMIT")}
+                                                    >
+                                                        <i className='far fa-eye' title='Hiện chủ đề'></i>
+                                                    </button>
+                                                }
                                             </div>
+
                                         </td>
                                     </tr>
                                 )

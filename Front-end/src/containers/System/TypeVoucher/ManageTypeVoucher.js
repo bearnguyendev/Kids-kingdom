@@ -27,6 +27,47 @@ class ManageTypeVoucher extends Component {
         this.props.fetchAllcodeDiscounts()
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
+        let arrCheck = ['minValue', 'maxValue']
+        for (let i = 0; i < arrCheck.length; i++) {
+            if (prevState[arrCheck[i]] !== this.state[arrCheck[i]]) {
+                if (this.state[arrCheck[i]] < 0) {
+                    this.setState({
+                        [arrCheck[i]]: 1
+                    })
+                } else if (this.state[arrCheck[i]] == 0) {
+                    this.setState({
+                        [arrCheck[i]]: ""
+                    })
+                }
+            }
+        }
+        let { type, value } = this.state
+        if (prevState.value !== this.state.value) {
+            if (type === "percent") {
+                if (value < 0 || value > 100) {
+                    toast.error(`Phần trăm giảm giá bạn vừa nhập là ${value}% không hợp lệ!`);
+                    this.setState({
+                        value: '',
+                    })
+                } else if (value == 0) {
+                    this.setState({
+                        value: '',
+                    })
+                }
+            }
+            if (type === "money") {
+                if (value < 0) {
+                    this.setState({
+                        value: 1
+                    })
+                } else if (value == 0) {
+                    this.setState({
+                        value: ''
+                    })
+                }
+            }
+        }
+
         if (prevProps.listTypeVouchers !== this.props.listTypeVouchers) {
             let discountArr = this.props.listDiscount
             this.setState({
@@ -59,6 +100,7 @@ class ManageTypeVoucher extends Component {
                     this.props.fetchAllTypeVouchers();
                 } else {
                     toast.error(res.errMessage)
+                    this.props.fetchAllTypeVouchers();
                 }
             }
             if (action === CRUD_ACTIONS.EDIT) {
@@ -87,7 +129,7 @@ class ManageTypeVoucher extends Component {
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
-                alert('Đây là trường bắt buộc: ' + arrCheck[i])
+                toast.error('Đây là trường bắt buộc: ' + arrCheck[i])
                 break;
             }
         }
@@ -142,7 +184,9 @@ class ManageTypeVoucher extends Component {
                                 <div className="input-group ">
                                     <input type="number" class="form-control"
                                         value={value}
-                                        onChange={(event) => this.onChangeInput(event, 'value')} />
+                                        onChange={(event) => this.onChangeInput(event, 'value')}
+                                        readOnly={this.state.action === CRUD_ACTIONS.EDIT ? true : false}
+                                    />
                                     <div className="input-group-append">
                                         <span className="input-group-text">{type === 'money' ? 'VND' : '%'}</span>
                                     </div>

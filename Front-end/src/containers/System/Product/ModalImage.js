@@ -6,6 +6,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import "./ModalImage.scss"
 import Lightbox from 'react-image-lightbox';
 import { CommonUtils } from '../../../utils';
+import { toast } from 'react-toastify';
 class ModalImage extends Component {
 
     constructor(props) {
@@ -48,7 +49,7 @@ class ModalImage extends Component {
         for (let i = 0; i < arrInput.length; i++) {
             if (!this.state[arrInput[i]]) {
                 isValid = false;
-                alert('Đây là trường bắt buộc: ' + arrInput[i])
+                toast.error('Đây là trường bắt buộc: ' + arrInput[i])
                 break;
             }
         }

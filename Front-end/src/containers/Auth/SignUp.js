@@ -117,7 +117,7 @@ class SignUp extends Component {
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
-                alert('Thông tin đầu vào này là bắt buộc: ' + arrCheck[i])
+                toast.error('Thông tin đầu vào này là bắt buộc: ' + arrCheck[i])
                 break;
             }
         }

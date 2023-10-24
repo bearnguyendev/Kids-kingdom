@@ -10,14 +10,26 @@ let createNewTypeShip = (data) => {
                     errMessage: 'Thiếu các thông số bắt buộc!'
                 })
             } else {
-                await db.TypeShip.create({
-                    type: data.type,
-                    price: data.price,
+                const [res, created] = await db.TypeShip.findOrCreate({
+                    where: {
+                        type: data.type
+                    },
+                    defaults: {
+                        type: data.type,
+                        price: data.price,
+                    }
                 })
-                resolve({
-                    errCode: 0,
-                    errMessage: 'Tạo mới phương thức vận chuyển thành công!'
-                })
+                if (!created) {
+                    resolve({
+                        errCode: 2,
+                        errMessage: `Phương thức vận chuyển ${data.type} đã tồn tại!`
+                    })
+                } else {
+                    resolve({
+                        errCode: 0,
+                        errMessage: 'Tạo mới phương thức vận chuyển thành công!'
+                    })
+                }
             }
         } catch (error) {
             reject(error)
@@ -105,6 +117,11 @@ let updateTypeShip = (data) => {
                         errCode: 0,
                         errMessage: 'Cập nhật thông tin phương thức vận chuyển thành công!'
                     })
+                } else {
+                    resolve({
+                        errCode: 2,
+                        errMessage: 'Không tìm thấy phương thức vận chuyển để chỉnh sửa!'
+                    })
                 }
             }
 
@@ -126,12 +143,27 @@ let deleteTypeShip = (data) => {
                     where: { id: data.id }
                 })
                 if (typeShip) {
-                    await db.TypeShip.destroy({
-                        where: { id: data.id }
+                    let typeShipUsed = db.OrderProduct.findOne({
+                        where: { typeShipId: data.id }
                     })
+                    if (typeShipUsed) {
+                        resolve({
+                            errCode: 3,
+                            errMessage: 'Không thể xoá phương thức vận chuyển đã được sử dụng!'
+                        })
+                    } else {
+                        await db.TypeShip.destroy({
+                            where: { id: data.id }
+                        })
+                        resolve({
+                            errCode: 0,
+                            errMessage: 'Xoá phương thức vận chuyển thành công!'
+                        })
+                    }
+                } else {
                     resolve({
-                        errCode: 0,
-                        errMessage: 'Xoá phương thức vận chuyển thành công!'
+                        errCode: 2,
+                        errMessage: 'Không tìm thấy phương thức vận chuyển!'
                     })
                 }
             }

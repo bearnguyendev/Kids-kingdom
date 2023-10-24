@@ -150,7 +150,7 @@ class ListOrder extends Component {
         // to the root node of the returned component as it will be overwritten.
 
         // Bad: the `onClick` here will be overwritten by `react-to-print`
-        // return <button onClick={() => alert('This will not work')}>Print this out!</button>;
+        // return <button onClick={() => toast.error('This will not work')}>Print this out!</button>;
 
         // Good
         return <button>Print using a Class</button>;

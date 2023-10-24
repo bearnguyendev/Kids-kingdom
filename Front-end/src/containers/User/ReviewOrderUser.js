@@ -113,7 +113,7 @@ class CommentModalUser extends Component {
         for (let i = 0; i < arrInput.length; i++) {
             if (!this.state[arrInput[i]]) {
                 isValid = false;
-                alert('Đây là trường bắt buộc: ' + arrInput[i])
+                toast.error('Đây là trường bắt buộc: ' + arrInput[i])
                 break;
             }
         }

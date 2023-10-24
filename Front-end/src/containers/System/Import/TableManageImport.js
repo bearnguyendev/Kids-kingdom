@@ -27,14 +27,20 @@ class TableManageImport extends Component {
             })
         }
     }
-    handleDeleteImport = async (id) => {
+    handleDeleteImport = async (id, productId, quantity) => {
         try {
-            let res = await deleteImportService(id);
+            let data = {
+                id,
+                productId,
+                quantity
+            }
+            let res = await deleteImportService(data);
             if (res && res.errCode === 0) {
                 toast.success(res.errMessage);
                 this.props.fetchAllImports();
             } else {
                 toast.error(res.errMessage)
+                this.props.fetchAllImports();
             }
         } catch (error) {
             toast.error(<FormattedMessage id={"error"} />)
@@ -47,6 +53,7 @@ class TableManageImport extends Component {
     }
     render() {
         let { arrImports } = this.state
+        console.log("check statete: ", this.state);
         return (
             <>
                 <table id='TableManageImport'>
@@ -66,9 +73,9 @@ class TableManageImport extends Component {
                                 return (
                                     <tr key={index}>
                                         <td>{index + 1}</td>
-                                        <td>{item.importData.name}</td>
-                                        <td>{item.quantity}</td>
-                                        <td>{item.priceImport.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</td>
+                                        <td>{item.importData && item.importData.name ? item.importData.name : ''}</td>
+                                        <td>{item.quantity ? item.quantity : ''}</td>
+                                        <td>{item.priceImport.toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) ? item.priceImport.toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) : ''}</td>
                                         <td>{moment(item.createAt).utc("+07:00").format("L")}</td>
                                         <td>
                                             <div className='btn-table-manage-import'>
@@ -79,7 +86,7 @@ class TableManageImport extends Component {
                                                 ><i className="fas fa-pencil-alt"></i></button>
                                                 <button
                                                     className='btn-delete'
-                                                    onClick={() => this.handleDeleteImport(item.id)}
+                                                    onClick={() => this.handleDeleteImport(item.id, item.productId, item.quantity)}
                                                     title="Xoá"
                                                 ><i className="fas fa-trash"></i></button>
                                             </div>
@@ -91,7 +98,7 @@ class TableManageImport extends Component {
                 </table>
                 {arrImports <= 0 &&
                     <div className='text-center mt-3'>
-                        <FormattedMessage id={"manage-type-ship.no-data"} />
+                        <FormattedMessage id={"manage-import.no-data"} />
                     </div>
                 }
             </>

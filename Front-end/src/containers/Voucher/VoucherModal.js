@@ -6,6 +6,7 @@ import "./VoucherModal.scss"
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { emitter } from '../../utils/emitter';
 import moment from 'moment';
+import { toast } from 'react-toastify';
 class VoucherModal extends Component {
 
     constructor(props) {
@@ -63,7 +64,7 @@ class VoucherModal extends Component {
             return item && item.codeVoucher === codeVoucher
         })
         if (!findVoucher) {
-            alert("Không tìm thấy mã giảm giá bạn vừa nhập. Vui lòng thử lại!")
+            toast.error("Không tìm thấy mã giảm giá bạn vừa nhập. Vui lòng thử lại!")
             this.setState({
                 codeVoucher: ''
             })

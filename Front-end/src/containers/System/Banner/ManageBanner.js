@@ -69,7 +69,15 @@ class ManageBanner extends Component {
                     toast.success(res.errMessage);
                     this.props.fetchAllBanners();
                 } else {
-                    toast.error("Cập nhật biểu ngữ thất bại! Vui lòng thử lại sau.")
+                    toast.error(res.errMessage)
+                    this.setState({
+                        name: '',
+                        image: '',
+                        description: '',
+                        previewImgURL: '',
+                        action: CRUD_ACTIONS.CREATE
+                    })
+                    this.props.fetchAllBanners();
                 }
             }
         } catch (error) {
@@ -89,7 +97,7 @@ class ManageBanner extends Component {
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
-                alert('Đây là trường bắt buộc: ' + arrCheck[i])
+                toast.error('Đây là trường bắt buộc: ' + arrCheck[i])
                 break;
             }
         }

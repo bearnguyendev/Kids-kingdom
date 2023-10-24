@@ -1,5 +1,5 @@
 import db from "../models/index";
-const { Op } = require("sequelize");
+const { Op, where } = require("sequelize");
 let getAllCode = (type) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -75,28 +75,33 @@ let updateAllCode = (data) => {
                     res.value = data.value
                     res.keyMap = data.keyMap
                     await res.save();
+                    resolve({
+                        errCode: 0,
+                        errMessage: 'Ok'
+                    })
+                } else {
+                    resolve({
+                        errCode: 2,
+                        errMessage: 'Không tồn tại trên hệ thống'
+                    })
                 }
-                resolve({
-                    errCode: 0,
-                    errMessage: 'Ok'
-                })
             }
         } catch (error) {
             reject(error)
         }
     })
 }
-let deleteAllCode = (id) => {
+let deleteAllCode = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            if (!id) {
+            if (!data.id || !data.type) {
                 resolve({
                     errCode: 1,
                     errMessage: 'Thiếu các thông số bắt buộc!'
                 })
             } else {
                 let foundAllCode = await db.Allcode.findOne({
-                    where: { id: id }
+                    where: { id: data.id }
                 })
                 if (!foundAllCode) {
                     resolve({
@@ -104,13 +109,78 @@ let deleteAllCode = (id) => {
                         errMessage: `Mã không tồn tại`
                     })
                 }
-                await db.Allcode.destroy({
-                    where: { id: id }
-                })
+                let res = ''
+                if (data.type === "BRAND") {
+                    res = await db.Product.findOne({
+                        where: { brandId: foundAllCode.keyMap },
+                    })
+                }
+                if (data.type === "CATEGORY") {
+                    res = await db.Product.findOne({
+                        where: { categoryId: foundAllCode.keyMap },
+                    })
+                }
+                if (data.type === "SUBJECT") {
+                    res = await db.Blog.findOne({
+                        where: { subjectId: foundAllCode.keyMap },
+                    })
+                }
+                if (res) {
+                    resolve({
+                        errCode: 3,
+                        errMessage: `Đã được sử dụng không thể xoá chỉ có thể ẩn!`
+                    })
+                } else {
+                    await db.Allcode.destroy({
+                        where: { id: data.id }
+                    })
+                    resolve({
+                        errCode: 0,
+                        errMessage: `Xoá thành công!`
+                    })
+                }
+            }
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+let changeStatusAllcode = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!data.id || !data.type) {
                 resolve({
-                    errCode: 0,
-                    errMessage: `Xoá thành công!`
+                    errCode: 1,
+                    errMessage: 'Thiếu các thông số bắt buộc!'
                 })
+            } else {
+                let res = await db.Allcode.findOne({
+                    where: { id: data.id },
+                    raw: false
+                })
+                if (res) {
+                    if (data.type === 'BAN') {
+                        res.status = 1;
+                        await res.save();
+                        resolve({
+                            errCode: 0,
+                            errMessage: 'Ẩn thành công!'
+                        })
+                    }
+                    if (data.type === 'PERMIT') {
+                        res.status = 0;
+                        await res.save();
+                        resolve({
+                            errCode: 0,
+                            errMessage: 'Hiện thành công!'
+                        })
+                    }
+                } else {
+                    resolve({
+                        errCode: 2,
+                        errMessage: 'Không tìm thấy mã!'
+                    })
+                }
             }
         } catch (error) {
             reject(error)
@@ -169,5 +239,6 @@ module.exports = {
     updateAllCode: updateAllCode,
     deleteAllCode: deleteAllCode,
     getListAllCode: getListAllCode,
-    getDetailAllCodeById: getDetailAllCodeById
+    getDetailAllCodeById: getDetailAllCodeById,
+    changeStatusAllcode: changeStatusAllcode
 }

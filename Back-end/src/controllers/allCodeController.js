@@ -37,7 +37,7 @@ let updateAllCode = async (req, res) => {
 }
 let deleteAllCode = async (req, res) => {
     try {
-        let data = await allCodeService.deleteAllCode(req.body.id);
+        let data = await allCodeService.deleteAllCode(req.body);
         return res.status(200).json(data);
     } catch (error) {
         console.log(error)
@@ -75,11 +75,24 @@ let getDetailAllCodeById = async (req, res) => {
         })
     }
 }
+let changeStatusAllcode = async (req, res) => {
+    try {
+        let data = await allCodeService.changeStatusAllcode(req.body);
+        return res.status(200).json(data);
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            errCode: -1,
+            errMessage: 'Lỗi từ máy chủ!'
+        })
+    }
+}
 module.exports = {
     getAllCode: getAllCode,
     createNewAllCode: createNewAllCode,
     updateAllCode: updateAllCode,
     deleteAllCode: deleteAllCode,
     getListAllCode: getListAllCode,
-    getDetailAllCodeById: getDetailAllCodeById
+    getDetailAllCodeById: getDetailAllCodeById,
+    changeStatusAllcode: changeStatusAllcode
 }

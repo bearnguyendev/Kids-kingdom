@@ -126,7 +126,7 @@ class ManageStatistical extends Component {
         let result = []
         let nowDate = moment.unix(Date.now() / 1000).format('DD/MM/YYYY')
         data && data.length > 0 && data.map(item => {
-            let dateSuccess = item.orderDateSuccess && moment.unix(item.orderDateSuccess / 1000).format('DD/MM/YYYY')
+            let dateSuccess = item.orderDateSuccess ? moment.unix(item.orderDateSuccess / 1000).format('DD/MM/YYYY') : ''
             if (item.statusId === "S7" && this.compareDates(dateSuccess, nowDate) === true) result.push(item)
         })
         return result;
@@ -191,6 +191,17 @@ class ManageStatistical extends Component {
         }
         return result;
     }
+    // buildDataMonth = () => {
+    //     let result = []
+    //     for (let i = 1; i <= moment.monthsShort().length; i++) {
+    //         let dayOfMonth = `Tháng thứ ${i}: ${moment().isoWeekYear(moment().year()).isoWeek(i).startOf('week').format("L")} - ${moment().isoWeekYear(moment().year()).isoWeek(i).endOf('week').format("L")}`
+    //         let object = {};
+    //         object.label = dayOfWeek
+    //         object.value = i
+    //         result.push(object)
+    //     }
+    //     return result;
+    // }
     handleChangeSelect = async (selectedOption, name) => {
         let stateName = name.name;
         let stateCopy = { ...this.state }
@@ -237,11 +248,6 @@ class ManageStatistical extends Component {
                 let firstDayOfWeek = now.clone().weekday(0);
                 let lastDayOfWeek = now.clone().weekday(6);
                 let isNowWeekday = now.isBetween(firstDayOfWeek, lastDayOfWeek, null, '[]');
-                console.log(`check dateSuccess: ${dateSuccess} `,);
-                console.log(`now: ${now}`);
-                console.log(`monday: ${firstDayOfWeek}`);
-                console.log(`friday: ${lastDayOfWeek}`);
-                console.log(`is now between firstDayOfWeek and lastDayOfWeek: ${isNowWeekday}`);
                 for (let i = 0; i < 7; i++) {
                     result[i] = result[i] ? result[i] : 0
                     if (isNowWeekday && moment(dateSuccess).isSame(now.clone().weekday(i), 'day')) {
@@ -256,9 +262,7 @@ class ManageStatistical extends Component {
     // Chart
     render() {
         let { arrTopViewProduct, productRedux, dataOrder, userRedux, topProductSales, orderSuccessByDay, money, week, selectedWeek } = this.state
-        console.log("this state: ", this.state);
-        let check = this.buildDataWeek()
-        console.log("check::: ", check);
+        console.log("check::: ", moment().daysInMonth(2));
         return (
             <>
                 <div className="container-fluid px-4">

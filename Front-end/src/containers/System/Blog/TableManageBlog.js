@@ -45,7 +45,7 @@ class TableManageBlog extends Component {
                     valueSearch: "ALL"
                 });
             } else {
-                toast.error("Xoá bài đăng thất bại. Vui lòng thử lại sau.")
+                toast.error(res.errMessage)
             }
         } catch (error) {
             toast.error("Thao tác thất bại! Vui lòng thử lại sau.")

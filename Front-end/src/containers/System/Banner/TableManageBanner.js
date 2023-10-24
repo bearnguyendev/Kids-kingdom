@@ -37,7 +37,7 @@ class TableManageBanner extends Component {
                 toast.success(res.errMessage);
                 this.props.fetchAllBanners();
             } else {
-                toast.error("Xoá biểu ngữ thất bại. Vui lòng thử lại sau.")
+                toast.error(res.errMessage)
             }
         } catch (error) {
             toast.error("Thao tác thất bại! Vui lòng thử lại sau.")

@@ -35,6 +35,7 @@ let initApiRoutes = (app) => {
     router.delete('/delete-all-code', allCodeController.deleteAllCode); //id
     router.get('/get-list-all-code', allCodeController.getListAllCode); //type,limit
     router.get('/get-detail-all-code-by-id', allCodeController.getDetailAllCodeById); //id
+    router.put('/change-status-all-code', allCodeController.changeStatusAllcode);
 
     router.post('/create-new-product', productController.createNewProduct);
     router.put('/update-product', productController.updateProduct);

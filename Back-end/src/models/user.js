@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
             User.belongsToMany(models.Voucher, { through: { model: models.VoucherUsed }, foreignKey: 'userId', as: 'VoucherOfUser' });
             User.belongsToMany(models.Product, { through: { model: models.Cart, unique: false }, foreignKey: 'userId', as: 'ProductUserCartData' });
             User.hasMany(models.Receiver, { foreignKey: 'userId', as: 'userData' })
-            User.hasOne(models.Comment, { foreignKey: 'userId' })
+            User.hasMany(models.Comment, { foreignKey: 'userId', as: 'userCommentData' })
         }
     };
     User.init({

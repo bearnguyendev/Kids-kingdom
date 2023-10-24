@@ -45,4 +45,28 @@
             color: rgb(235, 15, 15) !important;
         }
     }
+    .btn-change-status-blog{
+      border: none;
+      background: none;
+      .fa-eye{
+         border: none;
+         outline: none;
+         background: transparent;
+         color: #666;
+         &:hover{
+          background-color: transparent !important;
+          color: #000  !important;
+        }
+      }
+      .fa-eye-slash{
+         border: none;
+         outline: none;
+         background: transparent;
+         color: #666;
+         &:hover{
+          background-color: transparent !important;
+          color: #000 !important;
+        }
+      }
+    }
 }

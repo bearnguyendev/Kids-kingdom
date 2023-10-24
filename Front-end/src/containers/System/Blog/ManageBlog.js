@@ -92,6 +92,11 @@ class ManageBlog extends Component {
                     });
                 } else {
                     toast.error(res.errMessage)
+                    this.props.fetchAllBlogs({
+                        statusId: "ALL",
+                        subjectId: "ALL",
+                        valueSearch: "ALL"
+                    });
                 }
             }
         } catch (error) {
@@ -111,7 +116,7 @@ class ManageBlog extends Component {
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
-                alert('Đây là trường bắt buộc: ' + arrCheck[i])
+                toast.error('Đây là trường bắt buộc: ' + arrCheck[i])
                 break;
             }
         }
@@ -194,7 +199,9 @@ class ManageBlog extends Component {
                                     {arrSubject && arrSubject.length > 0 &&
                                         arrSubject.map((item, index) => {
                                             return (
+                                                item.status === 0 &&
                                                 <option key={index} value={item.keyMap}>{item.value}</option>
+
                                             )
                                         })}
                                 </select>

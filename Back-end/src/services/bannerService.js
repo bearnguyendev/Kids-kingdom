@@ -118,6 +118,11 @@ let updateBanner = (data) => {
                         errCode: 0,
                         errMessage: 'Cập nhật thông tin biểu ngữ thành công!'
                     })
+                } else {
+                    resolve({
+                        errCode: 2,
+                        errMessage: 'Không tìm thấy biểu ngữ!'
+                    })
                 }
             }
 
@@ -145,6 +150,11 @@ let deleteBanner = (data) => {
                     resolve({
                         errCode: 0,
                         errMessage: 'Xoá biểu ngữ thành công!'
+                    })
+                } else {
+                    resolve({
+                        errCode: 2,
+                        errMessage: 'Không tìm thấy biểu ngữ!'
                     })
                 }
             }

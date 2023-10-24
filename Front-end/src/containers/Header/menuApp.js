@@ -63,17 +63,17 @@ export const adminMenu = [
             },
         ]
     },
-    { //Thống kê
-        name: 'menu.admin.statistical', menus: [
-            {
-                name: 'menu.admin.website-parameters', link: '/admin/statistical'
-            },
-        ]
-    },
     { //Nhập hàng
         name: 'menu.admin.import', menus: [
             {
                 name: 'menu.admin.import', link: '/admin/manage-import'
+            },
+        ]
+    },
+    { //Thống kê
+        name: 'menu.admin.statistical', menus: [
+            {
+                name: 'menu.admin.website-parameters', link: '/admin/statistical'
             },
         ]
     },

@@ -8,6 +8,7 @@ import "./DetailUserPage.scss";
 import DatePicker from "../../components/Input/DatePicker";
 import { CommonUtils } from '../../utils';
 import moment from 'moment';
+import { toast } from 'react-toastify';
 class DetailUserPage extends Component {
 
     constructor(props) {
@@ -134,7 +135,7 @@ class DetailUserPage extends Component {
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
-                alert('Đây là trường bắt buộc: ' + arrCheck[i])
+                toast.error('Đây là trường bắt buộc: ' + arrCheck[i])
                 break;
             }
         }

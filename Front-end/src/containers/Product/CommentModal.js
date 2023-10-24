@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from "../../store/actions";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { emitter } from '../../utils/emitter';
+import { toast } from 'react-toastify';
 class CommentModal extends Component {
 
     constructor(props) {
@@ -38,6 +39,8 @@ class CommentModal extends Component {
     sendDataFromModalComment = () => {
         if (this.state.content) {
             this.props.sendDataFromModalComment(this.state.content)
+        } else {
+            toast.error("Nội dung không được để trống!")
         }
     }
     render() {

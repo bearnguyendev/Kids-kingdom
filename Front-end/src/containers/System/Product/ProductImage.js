@@ -135,7 +135,7 @@ class ProductImage extends Component {
                 let req = { productId, ...data }
                 let response = await createNewProductImageService(req)
                 if (response && response.errCode !== 0) {
-                    alert(response.errMessage)
+                    toast.error(response.errMessage)
                 } else {
                     this.props.fetchProductImageRedux(productId);
                     this.setState({

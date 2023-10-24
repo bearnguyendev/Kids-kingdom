@@ -215,10 +215,10 @@ export const createNewUser = (data) => {
             let res = await createANewUser(data);
             if (res && res.errCode === 0) {
                 dispatch(saveUserSuccess())
-                toast.success("Tạo mới người dùng thành công!")
+                toast.success(res.errMessage)
                 dispatch(fetchAllUserStart())
             } else {
-                toast.error("Tạo mới người dùng thất bại!")
+                toast.error(res.errMessage)
                 dispatch(saveUserFailed())
             }
         } catch (error) {

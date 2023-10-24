@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import DatePicker from "../../../components/Input/DatePicker";
 import { CommonUtils } from '../../../utils';
 import moment from 'moment';
+import { emitter } from '../../../utils/emitter';
 class ManageImport extends Component {
 
     constructor(props) {
@@ -29,6 +30,20 @@ class ManageImport extends Component {
             isExport: false,
             dataExport: []
         }
+        this.listenToEmitter();
+    }
+    listenToEmitter() {
+        emitter.on('EVENT_CLEAR_DATA', () => {
+            //reset state
+            this.setState({
+                productId: '',
+                priceImport: '',
+                quantity: '',
+                action: '',
+                selectedProduct: '',
+                nameProduct: '',
+            })
+        })
     }
     componentDidMount() {
         this.props.fetchAllImports()
@@ -47,6 +62,22 @@ class ManageImport extends Component {
                 dataExport: result
             })
         }
+        let arrCheck = ["quantity", "priceImport"]
+        for (let i = 0; i < arrCheck.length; i++) {
+            if (prevState[arrCheck[i]] !== this.state[arrCheck[i]]) {
+                if (this.state[arrCheck[i]] < 0) {
+                    this.setState({
+                        [arrCheck[i]]: 1
+                    })
+                } else if (this.state[arrCheck[i]] == 0) {
+                    this.setState({
+                        [arrCheck[i]]: ""
+                    })
+                }
+            }
+
+        }
+
         if (prevProps.listImports !== this.props.listImports) {
             this.setState({
                 type: '',
@@ -89,7 +120,7 @@ class ManageImport extends Component {
             if (isValid === false) {
                 return;
             }
-            let { action, quantity, priceImport, productId } = this.state
+            let { action, quantity, priceImport, productId, selectedProduct } = this.state
             if (quantity <= 0) {
                 toast.error(<FormattedMessage id={"manage-import.err-quantity"} />)
                 this.setState({
@@ -105,6 +136,7 @@ class ManageImport extends Component {
                     })
                     if (res && res.errCode === 0) {
                         toast.success(<FormattedMessage id={"manage-import.success"} />);
+                        emitter.emit('EVENT_CLEAR_DATA')
                         this.props.fetchAllImports();
                     } else {
                         toast.error(res.errMessage)
@@ -112,6 +144,7 @@ class ManageImport extends Component {
                 }
                 if (action === CRUD_ACTIONS.EDIT) {
                     // fire redux edit 
+                    let productId = selectedProduct && selectedProduct.value
                     let res = await editImportService({
                         id: this.state.editId,
                         quantity,
@@ -121,17 +154,11 @@ class ManageImport extends Component {
                     if (res && res.errCode === 0) {
                         toast.success(<FormattedMessage id={"manage-import.update"} />);
                         this.props.fetchAllImports();
-                        this.setState({
-                            productId: '',
-                            priceImport: '',
-                            quantity: '',
-                            action: '',
-                            selectedProduct: '',
-                            dataProduct: '',
-                            nameProduct: '',
-                        })
+                        emitter.emit('EVENT_CLEAR_DATA')
                     } else {
                         toast.error(res.errMessage)
+                        this.props.fetchAllImports();
+                        emitter.emit('EVENT_CLEAR_DATA')
                     }
                 }
             }
@@ -146,7 +173,7 @@ class ManageImport extends Component {
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
-                alert('Đây là trường bắt buộc: ' + arrCheck[i])
+                toast.error('Đây là trường bắt buộc: ' + arrCheck[i])
                 break;
             }
         }
@@ -166,7 +193,11 @@ class ManageImport extends Component {
             action: CRUD_ACTIONS.EDIT,
             editId: importProduct.id,
             productId: importProduct.productId,
-            nameProduct: importProduct.importData.name
+            nameProduct: importProduct && importProduct.importData ? importProduct.importData.name : '',
+            selectedProduct: {
+                label: importProduct && importProduct.importData ? importProduct.importData.name : '',
+                value: importProduct.productId
+            }
         })
     }
     handleOnChangeDatePickerFromDate = (date) => {
@@ -211,12 +242,12 @@ class ManageImport extends Component {
             await CommonUtils.exportExcel(dataExport, "Danh sách nhập hàng", nameFile)
         }
         else {
-            alert("Vui lòng chọn thời gian xuất các phiếu nhập!")
+            toast.error("Vui lòng chọn thời gian xuất các phiếu nhập!")
         }
     }
     render() {
         let { priceImport, quantity, selectedProduct, dataProduct, nameProduct, fromDate, toDate, isExport } = this.state
-        console.log("cjascjsja: ", toDate);
+        console.log("cjascjsja: ", this.state);
         return (
             <div className='manage-import-container'>
                 <div className="title" >
@@ -232,29 +263,20 @@ class ManageImport extends Component {
                             :
                             ""}
                         <div className='row'>
-                            {this.state.action === CRUD_ACTIONS.EDIT ?
-                                <div className='col-6'>
-                                    <input type='text'
-                                        className='form-control'
-                                        value={nameProduct}
-                                        readOnly
-                                    />
-                                </div>
-                                :
-                                <Select
-                                    value={selectedProduct}
-                                    onChange={this.handleChangeSelect}
-                                    options={dataProduct}
-                                    name={'selectedProduct'}
-                                    placeholder='Chọn sản phẩm...'
-                                    className="col-6"
-                                />
-                            }
+                            <Select
+                                value={selectedProduct}
+                                onChange={this.handleChangeSelect}
+                                options={dataProduct}
+                                name={'selectedProduct'}
+                                placeholder='Chọn sản phẩm...'
+                                className="col-6"
+                                isDisabled={nameProduct !== '' ? true : false}
+                            />
                         </div>
                         <div className='row'>
                             <div className='col-6'>
                                 <label><FormattedMessage id={"manage-import.quantity"} /></label>
-                                <input type='text'
+                                <input type='number'
                                     className='form-control'
                                     value={quantity}
                                     onChange={(event) => this.onChangeInput(event, 'quantity')}
@@ -263,7 +285,7 @@ class ManageImport extends Component {
                             <div className='col-6'>
                                 <label><FormattedMessage id={"manage-import.priceImport"} /></label>
                                 <div className="input-group ">
-                                    <input type="text" className="form-control"
+                                    <input type="number" className="form-control"
                                         aria-label="Amount (to the nearest dollar)"
                                         value={priceImport}
                                         onChange={(event) => this.onChangeInput(event, 'priceImport')} />

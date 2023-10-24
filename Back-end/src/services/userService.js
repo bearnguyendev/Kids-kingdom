@@ -30,7 +30,7 @@ let checkUserEmail = (userEmail) => {
                 if (user) {
                     resolve({
                         isValidEmail: 2,
-                        errMessage: 'Email của bạn đã được sử dụng. Vui lòng thử một email khác!'
+                        errMessage: 'Email đã được sử dụng. Vui lòng thử một email khác!'
                     });
                 } else {
                     resolve({ isValidEmail: 0 });
@@ -57,11 +57,11 @@ let validatePassword = (passwordInputValue) => {
     if (passwordLength === 0) {
         errMessage = "Mật khẩu không được để trống";
     } else if (!uppercasePassword) {
-        errMessage = "Mật khẩu phải có ít nhất một chữ in hoa";
+        errMessage = "Mật khẩu phải có ít nhất một ký tự in hoa";
     } else if (!lowercasePassword) {
-        errMessage = "Mật khẩu phải có ít nhất một chữ thường";
+        errMessage = "Mật khẩu phải có ít nhất một ký tự thường";
     } else if (!digitsPassword) {
-        errMessage = "Mật khẩu phải có ít nhất một chữ số";
+        errMessage = "Mật khẩu phải có ít nhất một ký tự số";
     } else if (!specialCharPassword) {
         errMessage = "Mật khẩu phải có ít nhất một ký tự đặc biệt";
     } else if (!minLengthPassword) {
@@ -76,7 +76,7 @@ let validatePhoneNumber = (phoneNumber) => {
     const check = regExp.test(phoneNumber)
     let errMessage = "";
     if (!check) {
-        errMessage = "Số điện thoại của bạn không đúng định dạng!"
+        errMessage = "Số điện thoại không đúng định dạng!"
     } else {
         errMessage = "";
     }
@@ -500,7 +500,7 @@ let sendForgotPassword = (email) => {
             if (!email) {
                 resolve({
                     errCode: 1,
-                    errMessage: 'Thiếu các thông số bắt buộc!'
+                    errMessage: 'Hãy nhập email!'
                 })
             } else {
                 let user = await db.User.findOne({

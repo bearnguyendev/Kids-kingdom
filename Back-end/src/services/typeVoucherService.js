@@ -127,20 +127,36 @@ let deleteTypeVoucher = (data) => {
                     where: { id: data.id }
                 })
                 if (typeVoucher) {
-                    let res = await db.TypeVoucher.destroy({
-                        where: { id: data.id }
+                    let voucher = await db.Voucher.findOne({
+                        where: { typeVoucherId: data.id }
                     })
-                    if (!res) {
-                        resolve({
-                            errCode: 2,
-                            errMessage: 'Xoá loại giảm giá thất bại!'
+                    if (!voucher) {
+                        let res = await db.TypeVoucher.destroy({
+                            where: { id: data.id }
                         })
+                        if (!res) {
+                            resolve({
+                                errCode: 2,
+                                errMessage: 'Xoá loại giảm giá thất bại!'
+                            })
+                        } else {
+                            resolve({
+                                errCode: 0,
+                                errMessage: 'Xoá loại giảm giá thành công!'
+                            })
+                        }
                     } else {
                         resolve({
-                            errCode: 0,
-                            errMessage: 'Xoá loại giảm giá thành công!'
+                            errCode: 4,
+                            errMessage: 'Loại giảm giá đã được sử dụng không thể xoá!'
                         })
                     }
+
+                } else {
+                    resolve({
+                        errCode: 3,
+                        errMessage: 'Không tìm thấy loại giảm giá!'
+                    })
                 }
             }
 

@@ -64,6 +64,12 @@ class ManageBrand extends Component {
                     this.props.fetchAllcodeBrands();
                 } else {
                     toast.error(res.errMessage)
+                    this.setState({
+                        keyMap: '',
+                        value: '',
+                        action: CRUD_ACTIONS.CREATE
+                    })
+                    this.props.fetchAllcodeBrands()
                 }
             }
         } catch (error) {
@@ -76,7 +82,7 @@ class ManageBrand extends Component {
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
-                alert('Đây là trường bắt buộc: ' + arrCheck[i])
+                toast.error('Đây là trường bắt buộc: ' + arrCheck[i])
                 break;
             }
         }
@@ -116,6 +122,7 @@ class ManageBrand extends Component {
                                     className='form-control'
                                     value={keyMap}
                                     onChange={(event) => this.onChangeInput(event, 'keyMap')}
+                                    readOnly={this.state.action === CRUD_ACTIONS.EDIT ? true : false}
                                 />
                             </div>
                             <div className='col-6'>

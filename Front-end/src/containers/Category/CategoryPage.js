@@ -50,6 +50,7 @@ class CategoryPage extends Component {
         window.scrollTo(0, 0)
         if (prevProps.listCategory !== this.props.listCategory) {
             let { listCategory } = this.props;
+            listCategory = listCategory && listCategory.filter(item => item.status === 0)
             listCategory.unshift({
                 createdAt: null,
                 keyMap: 'ALL',
@@ -64,6 +65,7 @@ class CategoryPage extends Component {
         }
         if (prevProps.listBrands !== this.props.listBrands) {
             let { listBrands } = this.props;
+            listBrands = listBrands && listBrands.filter(item => item.status === 0)
             listBrands.unshift({
                 createdAt: null,
                 keyMap: "ALL",
@@ -307,7 +309,7 @@ class CategoryPage extends Component {
     render() {
         let { dataCategory, dataBrands, selectedCategory, selectedBrand, arrProduct, isSelectedSortCreatedAt, isSelectedSortView, valueSearch } = this.state
         //arrProduct = arrProduct.concat(arrProduct).concat(arrProduct).concat(arrProduct).concat(arrProduct)
-        console.log("check arrProduct: ", arrProduct);
+        console.log("check arrProduct: ", this.props.listBrands);
         return (
             <>
                 <HomeNav />

@@ -10,6 +10,7 @@ import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import localization from 'moment/locale/vi'
 import moment from 'moment';
+import { toast } from 'react-toastify';
 class ManageUser extends Component {
 
     constructor(props) {
@@ -148,7 +149,7 @@ class ManageUser extends Component {
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
-                alert('Đây là trường bắt buộc: ' + arrCheck[i])
+                toast.error('Đây là trường bắt buộc: ' + arrCheck[i])
                 break;
             }
         }
@@ -287,7 +288,7 @@ class ManageUser extends Component {
                                             className='form-control'
                                             onChange={this.handleOnChangeDatePicker}
                                             value={this.state.birthday}
-                                            maxDate={"today"}
+                                            maxDate={new Date()}
                                         />
                                     </div>
                                     <div className='col-3'>

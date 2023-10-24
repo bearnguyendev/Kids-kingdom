@@ -97,6 +97,11 @@ class CommentProduct extends Component {
         try {
             let { activeStar, content, image } = this.state
             let { productId, userInfo } = this.props
+            if (!activeStar && !content) {
+                toast.error("Không được để trống nội dung và số sao!")
+                this.props.fetchAllCommentByProductIdRedux(productId)
+                return;
+            }
             if (!activeStar) toast.error("Bạn chưa chọn sao !")
             else if (!content) toast.error("Nội dung không được để trống !")
             else {
@@ -220,7 +225,7 @@ class CommentProduct extends Component {
                         </div>
                     </div>
                     <div className="review_list">
-                        {/* {
+                        {
                             userInfo &&
                             <div className="review_item">
                                 <div className="form-group">
@@ -246,7 +251,7 @@ class CommentProduct extends Component {
                                 <div style={{ backgroundImage: `url(${previewImgSendComment})` }} className="preview-cmt-img">
                                 </div>
                             </div>
-                        } */}
+                        }
                         <div className='item-comment'>
                             {dataComment && dataComment.length > 0 &&
                                 dataComment.map((item, index) => {

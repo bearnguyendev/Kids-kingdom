@@ -44,8 +44,11 @@ const createANewAllCode = (data) => {
 const editAllCodeService = (data) => {
     return axios.put('/api/update-all-code', data)
 }
-const deleteAllCodeService = (allCodeId) => {
-    return axios.delete('/api/delete-all-code', { data: { id: allCodeId } })
+const deleteAllCodeService = (data) => {
+    return axios.delete('/api/delete-all-code', { data: data })
+}
+const handleChangeStatusAllcode = (data) => {
+    return axios.put('/api/change-status-all-code', data)
 }
 const createNewProduct = (data) => {
     return axios.post(`/api/create-new-product`, data)
@@ -238,8 +241,8 @@ const createNewImportService = (data) => {
 const editImportService = (data) => {
     return axios.put('/api/update-import-product', data)
 }
-const deleteImportService = (id) => {
-    return axios.delete('/api/delete-import-product', { data: { id: id } })
+const deleteImportService = (data) => {
+    return axios.delete('/api/delete-import-product', { data: data })
 }
 const getAllImports = () => {
     return axios.get(`/api/get-all-import-product`)
@@ -257,5 +260,5 @@ const handleLoginWithGoogle = () => {
     return axios.get('/api/auth/google')
 }
 export {
-    handleLogin, sendForgotPassword, handleResetPassword, getAllCodeService, getDetailUserById, createANewUser, deleteUserService, editUserService, getAllUsers, handleChangePassword, handleChangeStatusUser, handleSendVerifyEmail, handleVerifyEmail, editAllCodeService, deleteAllCodeService, createANewAllCode, createNewProduct, getAllProducts, getDetailProductById, getTopProductHomePage, editProductService, handleChangeStatusProduct, deleteProductService, getAllProductImageFromProductService, createNewProductImageService, editProductImageService, deleteProductImageService, getAllBanners, getListBanners, createNewBannerService, editBannerService, deleteBannerService, handleChangeStatusBanner, createNewTypeShipService, editTypeShipService, deleteTypeShipService, getAllTypeShips, createNewBlogService, editBlogService, deleteBlogService, getAllBlogs, getDetailBlogById, getListBlogs, handleChangeStatusBlog, createNewTypeVoucherService, editTypeVoucherService, deleteTypeVoucherService, getAllTypeVouchers, createNewVoucherService, editVoucherService, deleteVoucherService, getAllVouchers, saveUserVoucherService, getDetailVoucherById, getAllVoucherByUserId, handleAddCartService, getAllCartByUserIdService, deleteItemCartService, deleteItemCartByUserIdService, createNewReceiverService, editReceiverService, deleteReceiverService, getAllReceiverByUserIdService, getDetailReceiverById, createNewOrderService, updateStatusOrderService, getDetailOrderByIdService, getAllOrderByUserIdService, getAllOrderService, handleChangeStatusService, createNewCommentService, replyComment, deleteCommentService, getAllCommentByProductIdService, createNewImportService, editImportService, getAllImports, deleteImportService, paymentPayPalService, paymentPayPalSuccessService, paymentMomoService, handleLoginWithGoogle
+    handleLogin, sendForgotPassword, handleResetPassword, getAllCodeService, handleChangeStatusAllcode, getDetailUserById, createANewUser, deleteUserService, editUserService, getAllUsers, handleChangePassword, handleChangeStatusUser, handleSendVerifyEmail, handleVerifyEmail, editAllCodeService, deleteAllCodeService, createANewAllCode, createNewProduct, getAllProducts, getDetailProductById, getTopProductHomePage, editProductService, handleChangeStatusProduct, deleteProductService, getAllProductImageFromProductService, createNewProductImageService, editProductImageService, deleteProductImageService, getAllBanners, getListBanners, createNewBannerService, editBannerService, deleteBannerService, handleChangeStatusBanner, createNewTypeShipService, editTypeShipService, deleteTypeShipService, getAllTypeShips, createNewBlogService, editBlogService, deleteBlogService, getAllBlogs, getDetailBlogById, getListBlogs, handleChangeStatusBlog, createNewTypeVoucherService, editTypeVoucherService, deleteTypeVoucherService, getAllTypeVouchers, createNewVoucherService, editVoucherService, deleteVoucherService, getAllVouchers, saveUserVoucherService, getDetailVoucherById, getAllVoucherByUserId, handleAddCartService, getAllCartByUserIdService, deleteItemCartService, deleteItemCartByUserIdService, createNewReceiverService, editReceiverService, deleteReceiverService, getAllReceiverByUserIdService, getDetailReceiverById, createNewOrderService, updateStatusOrderService, getDetailOrderByIdService, getAllOrderByUserIdService, getAllOrderService, handleChangeStatusService, createNewCommentService, replyComment, deleteCommentService, getAllCommentByProductIdService, createNewImportService, editImportService, getAllImports, deleteImportService, paymentPayPalService, paymentPayPalSuccessService, paymentMomoService, handleLoginWithGoogle
 }

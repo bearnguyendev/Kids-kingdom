@@ -29,6 +29,17 @@ class ManageTypeShip extends Component {
                 action: CRUD_ACTIONS.CREATE
             })
         }
+        if (prevState.price !== this.state.price) {
+            if (this.state.price < 0) {
+                this.setState({
+                    price: 1
+                })
+            } else if (this.state.price == 0) {
+                this.setState({
+                    price: ""
+                })
+            }
+        }
     }
     handleSaveUser = async () => {
         try {
@@ -62,6 +73,7 @@ class ManageTypeShip extends Component {
                     this.props.fetchAllTypeShips();
                 } else {
                     toast.error(res.errMessage)
+                    this.props.fetchAllTypeShips();
                 }
             }
         } catch (error) {
@@ -74,7 +86,7 @@ class ManageTypeShip extends Component {
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
-                alert('Đây là trường bắt buộc: ' + arrCheck[i])
+                toast.error('Đây là trường bắt buộc: ' + arrCheck[i])
                 break;
             }
         }

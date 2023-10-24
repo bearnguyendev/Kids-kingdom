@@ -282,7 +282,8 @@
         "edit":"Cập nhật",
         "name": "Tên sản phẩm",
         "date": "Ngày nhập",
-        "err-quantity": "Số lượng nhập hàng tối thiểu là 1"
+        "err-quantity": "Số lượng nhập hàng tối thiểu là 1",
+        "no-data":"Chưa có dữ liệu!"
     },
     "home-page":{
         "about": "Truyền thông nói về KidsKingdom",

@@ -35,6 +35,17 @@ class ManageVoucher extends Component {
         this.props.fetchAllTypeVouchers()
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevState.number !== this.state.number) {
+            if (this.state.number < 0) {
+                this.setState({
+                    number: 1
+                })
+            } else if (this.state.number == 0) {
+                this.setState({
+                    number: ""
+                })
+            }
+        }
         if (prevProps.listVouchers !== this.props.listVouchers) {
             let typeVoucherArr = this.props.listTypeVoucher
             this.setState({
@@ -94,6 +105,7 @@ class ManageVoucher extends Component {
                     this.props.fetchAllVouchers();
                 } else {
                     toast.error(res.errMessage)
+                    this.props.fetchAllVouchers();
                 }
             }
         } catch (error) {
@@ -113,7 +125,7 @@ class ManageVoucher extends Component {
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
-                alert('Đây là trường bắt buộc: ' + arrCheck[i])
+                toast.error('Đây là trường bắt buộc: ' + arrCheck[i])
                 break;
             }
         }
@@ -196,7 +208,9 @@ class ManageVoucher extends Component {
                                 <div className="input-group ">
                                     <input type="text" class="form-control"
                                         value={codeVoucher}
-                                        onChange={(event) => this.onChangeInput(event, 'codeVoucher')} />
+                                        onChange={(event) => this.onChangeInput(event, 'codeVoucher')}
+                                        readOnly={this.state.action === CRUD_ACTIONS.EDIT ? true : false}
+                                    />
                                 </div>
                             </div>
 

@@ -10,6 +10,7 @@ let addImport = (data) => {
             } else {
                 const [res, created] = await db.ImportProduct.findOrCreate({
                     where: {
+                        productId: data.productId,
                         priceImport: data.priceImport
                     },
                     defaults: {
@@ -25,7 +26,7 @@ let addImport = (data) => {
                 if (!created) {
                     resolve({
                         errCode: 3,
-                        errMessage: `Phiếu nhập sản phẩm ${product.name} có giá  nhập ${data.priceImport} đã tồn tại! Hãy cập nhật số lượng`
+                        errMessage: `Phiếu nhập sản phẩm ${product.name} có giá  nhập ${data.priceImport} VND đã tồn tại. Hãy cập nhật số lượng!`
                     })
                 } else {
                     if (product) {
@@ -77,7 +78,7 @@ let updateImport = (data) => {
                 })
             } else {
                 let importProduct = await db.ImportProduct.findOne({
-                    where: { id: data.id, productId: data.productId },
+                    where: { id: data.id },
                     raw: false
                 })
                 if (importProduct) {
@@ -101,6 +102,7 @@ let updateImport = (data) => {
                             errMessage: 'Không tìm thấy sản phẩm!'
                         })
                     }
+                    importProduct.productId = data.productId
                     importProduct.priceImport = data.priceImport
                     importProduct.quantity = data.quantity
                     importProduct.save()
@@ -111,7 +113,7 @@ let updateImport = (data) => {
                 } else {
                     resolve({
                         errCode: 2,
-                        errMessage: 'Không tìm thấy phiếu nhập!'
+                        errMessage: 'Không tìm thấy sản phẩm trong phiếu nhập!'
                     })
                 }
 
@@ -124,7 +126,7 @@ let updateImport = (data) => {
 let deleteImport = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            if (!data.id) {
+            if (!data.id || !data.productId) {
                 resolve({
                     errCode: 1,
                     errMessage: 'Thiếu các thông số bắt buộc!'
@@ -134,13 +136,27 @@ let deleteImport = (data) => {
                     where: { id: data.id }
                 })
                 if (importProduct) {
-                    await db.ImportProduct.destroy({
-                        where: { id: data.id }
+                    let product = await db.Product.findOne({
+                        where: { id: data.productId },
+                        raw: false
                     })
-                    resolve({
-                        errCode: 0,
-                        errMessage: 'Xoá phiếu nhập thành công!'
-                    })
+                    if (product) {
+                        product.stock -= +data.quantity
+                        await product.save()
+                        await db.ImportProduct.destroy({
+                            where: { id: data.id }
+                        })
+                        resolve({
+                            errCode: 0,
+                            errMessage: 'Xoá phiếu nhập thành công!'
+                        })
+                    } else {
+                        resolve({
+                            errCode: 3,
+                            errMessage: 'Không tìm thấy sản phẩm trong phiếu nhập!'
+                        })
+                    }
+
                 } else {
                     resolve({
                         errCode: 2,
