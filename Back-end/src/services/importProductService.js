@@ -1,11 +1,12 @@
 import db from "../models/index";
+import { Message } from "../config/message";
 let addImport = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             if (!data.priceImport || !data.quantity || !data.productId) {
                 resolve({
                     errCode: 1,
-                    errMessage: 'Thiếu các thông số bắt buộc!'
+                    errMessage: Message.errCode1
                 })
             } else {
                 const [res, created] = await db.ImportProduct.findOrCreate({
@@ -34,12 +35,12 @@ let addImport = (data) => {
                         await product.save()
                         resolve({
                             errCode: 0,
-                            errMessage: 'Tạo mới phiếu nhập thành công!'
+                            errMessage: Message.Import.add
                         })
                     } else {
                         resolve({
                             errCode: 2,
-                            errMessage: 'Không tìm thấy sản phẩm!'
+                            errMessage: Message.Import.errCode2SP
                         })
                     }
 
@@ -74,7 +75,7 @@ let updateImport = (data) => {
             if (!data.priceImport || !data.quantity || !data.productId || !data.id) {
                 resolve({
                     errCode: 1,
-                    errMessage: 'Thiếu các thông số bắt buộc!'
+                    errMessage: Message.errCode1
                 })
             } else {
                 let importProduct = await db.ImportProduct.findOne({
@@ -98,8 +99,8 @@ let updateImport = (data) => {
                         }
                     } else {
                         resolve({
-                            errCode: 3,
-                            errMessage: 'Không tìm thấy sản phẩm!'
+                            errCode: 2,
+                            errMessage: Message.Import.errCode2SP
                         })
                     }
                     importProduct.productId = data.productId
@@ -108,12 +109,12 @@ let updateImport = (data) => {
                     importProduct.save()
                     resolve({
                         errCode: 0,
-                        errMessage: 'Cập nhật phiếu nhập thành công!'
+                        errMessage: Message.Import.up
                     })
                 } else {
                     resolve({
-                        errCode: 2,
-                        errMessage: 'Không tìm thấy sản phẩm trong phiếu nhập!'
+                        errCode: 3,
+                        errMessage: Message.Import.noProductInImport
                     })
                 }
 
@@ -129,7 +130,7 @@ let deleteImport = (data) => {
             if (!data.id || !data.productId) {
                 resolve({
                     errCode: 1,
-                    errMessage: 'Thiếu các thông số bắt buộc!'
+                    errMessage: Message.errCode1
                 })
             } else {
                 let importProduct = await db.ImportProduct.findOne({
@@ -148,19 +149,19 @@ let deleteImport = (data) => {
                         })
                         resolve({
                             errCode: 0,
-                            errMessage: 'Xoá phiếu nhập thành công!'
+                            errMessage: Message.Import.delete
                         })
                     } else {
                         resolve({
                             errCode: 3,
-                            errMessage: 'Không tìm thấy sản phẩm trong phiếu nhập!'
+                            errMessage: Message.Import.noProductInImport
                         })
                     }
 
                 } else {
                     resolve({
                         errCode: 2,
-                        errMessage: 'Không tìm thấy phiếu nhập!'
+                        errMessage: Message.Import.errCode2PN
                     })
                 }
             }

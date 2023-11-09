@@ -25,7 +25,7 @@ class CategoryPage extends Component {
             sortPercent: '',
             selectedCategory: '',
             selectedBrand: '',
-            valueSearch: "ALL",
+            valueSearch: "",
             isSelectedSortCreatedAt: 0,
             isSelectedSortView: 0,
             scrollTop: 0,
@@ -42,7 +42,7 @@ class CategoryPage extends Component {
             statusId: "S1",
             categoryId: "ALL",
             brandId: "ALL",
-            valueSearch: this.state.valueSearch
+            valueSearch: this.state.valueSearch ? this.state.valueSearch : 'ALL'
         })
     }
 
@@ -229,7 +229,7 @@ class CategoryPage extends Component {
     handleOnChangeInput = async (event, id) => {
         if (event.target.value === '') {
             await this.setState({
-                valueSearch: "ALL",
+                valueSearch: "",
                 isSelectedSortCreatedAt: 0,
                 isSelectedSortView: 0
             })
@@ -237,7 +237,7 @@ class CategoryPage extends Component {
                 statusId: "S1",
                 categoryId: this.state.selectedCategory ? this.state.selectedCategory.value : "ALL",
                 brandId: this.state.selectedBrand ? this.state.selectedBrand.value : "ALL",
-                valueSearch: this.state.valueSearch
+                valueSearch: this.state.valueSearch ? this.state.valueSearch : 'ALL'
             })
         } else {
             let copyState = { ...this.state }
@@ -292,7 +292,7 @@ class CategoryPage extends Component {
                 sortPercent: '',
                 selectedCategory: this.state.dataCategory.find(item => item.value === "ALL"),
                 selectedBrand: this.state.dataBrands.find(item => item.value === "ALL"),
-                valueSearch: "ALL",
+                valueSearch: "",
                 isSelectedSortView: 0,
                 isSelectedSortCreatedAt: 0,
             })
@@ -300,7 +300,7 @@ class CategoryPage extends Component {
                 statusId: "S1",
                 categoryId: "ALL",
                 brandId: "ALL",
-                valueSearch: this.state.valueSearch
+                valueSearch: this.state.valueSearch ? this.state.valueSearch : 'ALL'
             })
         } catch (error) {
             console.log(error);
@@ -309,7 +309,7 @@ class CategoryPage extends Component {
     render() {
         let { dataCategory, dataBrands, selectedCategory, selectedBrand, arrProduct, isSelectedSortCreatedAt, isSelectedSortView, valueSearch } = this.state
         //arrProduct = arrProduct.concat(arrProduct).concat(arrProduct).concat(arrProduct).concat(arrProduct)
-        console.log("check arrProduct: ", this.props.listBrands);
+        console.log("check arrProduct: ", this.state);
         return (
             <>
                 <HomeNav />

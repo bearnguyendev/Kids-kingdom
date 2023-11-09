@@ -1,12 +1,13 @@
 import db from "../models/index";
 const { Op, where } = require("sequelize");
+import { Message } from "../config/message";
 let getAllCode = (type) => {
     return new Promise(async (resolve, reject) => {
         try {
             if (!type) {
                 resolve({
                     errCode: 1,
-                    errMessage: 'Thiếu các thông số bắt buộc!'
+                    errMessage: Message.errCode1
                 })
             } else {
                 let data = await db.Allcode.findAll({
@@ -28,7 +29,7 @@ let createNewAllCode = (data) => {
             if (!data.type || !data.value || !data.keyMap) {
                 resolve({
                     errCode: 1,
-                    errMessage: 'Thiếu các thông số bắt buộc!'
+                    errMessage: Message.errCode1
                 })
             } else {
                 const [res, created] = await db.Allcode.findOrCreate({
@@ -42,12 +43,12 @@ let createNewAllCode = (data) => {
                 if (!created) {
                     resolve({
                         errCode: 2,
-                        errMessage: 'Đã tồn tại trên hệ thống!'
+                        errMessage: Message.Allcode.alreadyExists
                     })
                 } else {
                     resolve({
                         errCode: 0,
-                        errMessage: 'Ok'
+                        errMessage: Message.Allcode.errCode0
                     })
                 }
             }
@@ -62,7 +63,7 @@ let updateAllCode = (data) => {
             if (!data.value || !data.keyMap || !data.id) {
                 resolve({
                     errCode: 1,
-                    errMessage: 'Thiếu các thông số bắt buộc!'
+                    errMessage: Message.errCode1
                 })
             } else {
                 let res = await db.Allcode.findOne({
@@ -77,12 +78,12 @@ let updateAllCode = (data) => {
                     await res.save();
                     resolve({
                         errCode: 0,
-                        errMessage: 'Ok'
+                        errMessage: Message.Allcode.errCode0
                     })
                 } else {
                     resolve({
                         errCode: 2,
-                        errMessage: 'Không tồn tại trên hệ thống'
+                        errMessage: Message.Allcode.errCode2
                     })
                 }
             }
@@ -97,7 +98,7 @@ let deleteAllCode = (data) => {
             if (!data.id || !data.type) {
                 resolve({
                     errCode: 1,
-                    errMessage: 'Thiếu các thông số bắt buộc!'
+                    errMessage: Message.errCode1
                 })
             } else {
                 let foundAllCode = await db.Allcode.findOne({
@@ -106,7 +107,7 @@ let deleteAllCode = (data) => {
                 if (!foundAllCode) {
                     resolve({
                         errCode: 2,
-                        errMessage: `Mã không tồn tại`
+                        errMessage: Message.Allcode.errCode2
                     })
                 }
                 let res = ''
@@ -128,7 +129,7 @@ let deleteAllCode = (data) => {
                 if (res) {
                     resolve({
                         errCode: 3,
-                        errMessage: `Đã được sử dụng không thể xoá chỉ có thể ẩn!`
+                        errMessage: Message.Allcode.used
                     })
                 } else {
                     await db.Allcode.destroy({
@@ -136,7 +137,7 @@ let deleteAllCode = (data) => {
                     })
                     resolve({
                         errCode: 0,
-                        errMessage: `Xoá thành công!`
+                        errMessage: Message.Allcode.delete
                     })
                 }
             }
@@ -151,7 +152,7 @@ let changeStatusAllcode = (data) => {
             if (!data.id || !data.type) {
                 resolve({
                     errCode: 1,
-                    errMessage: 'Thiếu các thông số bắt buộc!'
+                    errMessage: Message.errCode1
                 })
             } else {
                 let res = await db.Allcode.findOne({
@@ -164,7 +165,7 @@ let changeStatusAllcode = (data) => {
                         await res.save();
                         resolve({
                             errCode: 0,
-                            errMessage: 'Ẩn thành công!'
+                            errMessage: Message.Allcode.hidden
                         })
                     }
                     if (data.type === 'PERMIT') {
@@ -172,13 +173,13 @@ let changeStatusAllcode = (data) => {
                         await res.save();
                         resolve({
                             errCode: 0,
-                            errMessage: 'Hiện thành công!'
+                            errMessage: Message.Allcode.show
                         })
                     }
                 } else {
                     resolve({
                         errCode: 2,
-                        errMessage: 'Không tìm thấy mã!'
+                        errMessage: Message.Allcode.errCode2
                     })
                 }
             }
@@ -193,7 +194,7 @@ let getListAllCode = (data) => {
             if (!data.type || !data.limit) {
                 resolve({
                     errCode: 1,
-                    errMessage: 'Thiếu các thông số bắt buộc!'
+                    errMessage: Message.errCode1
                 })
             } else {
 
@@ -217,7 +218,7 @@ let getDetailAllCodeById = (id) => {
             if (!id) {
                 resolve({
                     errCode: 1,
-                    errMessage: 'Thiếu các thông số bắt buộc!'
+                    errMessage: Message.errCode1
                 })
             } else {
                 let data = await db.Allcode.findOne({

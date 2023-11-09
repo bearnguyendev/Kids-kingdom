@@ -303,12 +303,12 @@ class DetailProduct extends Component {
                         />
                     </div>
                     {/* BINH LUAN SAN PHAM  : END*/}
-                    <div className='comment-box'>
+                    {/* <div className='comment-box'>
                         <Comment
                             dataHref={currentURL}
                             width={"100%"}
                         />
-                    </div>
+                    </div> */}
                 </div>
                 {
                     isOpen === true &&

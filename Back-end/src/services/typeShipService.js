@@ -1,13 +1,13 @@
 import db from "../models/index";
 require('dotenv').config();
-
+import { Message } from "../config/message";
 let createNewTypeShip = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             if (!data.price || !data.type) {
                 resolve({
                     errCode: 1,
-                    errMessage: 'Thiếu các thông số bắt buộc!'
+                    errMessage: Message.errCode1
                 })
             } else {
                 const [res, created] = await db.TypeShip.findOrCreate({
@@ -27,7 +27,7 @@ let createNewTypeShip = (data) => {
                 } else {
                     resolve({
                         errCode: 0,
-                        errMessage: 'Tạo mới phương thức vận chuyển thành công!'
+                        errMessage: Message.TypeShip.add
                     })
                 }
             }
@@ -42,7 +42,7 @@ let getDetailTypeShipById = (id) => {
             if (!id) {
                 resolve({
                     errCode: 1,
-                    errMessage: 'Thiếu các thông số bắt buộc!'
+                    errMessage: Message.errCode1
                 })
             } else {
                 let data = await db.TypeShip.findOne({
@@ -78,7 +78,7 @@ let getListTypeShip = (data) => {
             if (!data.limit) {
                 resolve({
                     errCode: 1,
-                    errMessage: 'Thiếu các thông số bắt buộc!'
+                    errMessage: Message.errCode1
                 })
             } else {
                 let res = await db.TypeShip.findAll({
@@ -102,7 +102,7 @@ let updateTypeShip = (data) => {
             if (!data.id || !data.price || !data.type) {
                 resolve({
                     errCode: 1,
-                    errMessage: 'Thiếu các thông số bắt buộc!'
+                    errMessage: Message.errCode1
                 })
             } else {
                 let typeShip = await db.TypeShip.findOne({
@@ -115,12 +115,12 @@ let updateTypeShip = (data) => {
                     await typeShip.save()
                     resolve({
                         errCode: 0,
-                        errMessage: 'Cập nhật thông tin phương thức vận chuyển thành công!'
+                        errMessage: Message.TypeShip.up
                     })
                 } else {
                     resolve({
                         errCode: 2,
-                        errMessage: 'Không tìm thấy phương thức vận chuyển để chỉnh sửa!'
+                        errMessage: Message.TypeShip.errCode2
                     })
                 }
             }
@@ -136,7 +136,7 @@ let deleteTypeShip = (data) => {
             if (!data.id) {
                 resolve({
                     errCode: 1,
-                    errMessage: 'Thiếu các thông số bắt buộc!'
+                    errMessage: Message.errCode1
                 })
             } else {
                 let typeShip = await db.TypeShip.findOne({
@@ -149,7 +149,7 @@ let deleteTypeShip = (data) => {
                     if (typeShipUsed) {
                         resolve({
                             errCode: 3,
-                            errMessage: 'Không thể xoá phương thức vận chuyển đã được sử dụng!'
+                            errMessage: Message.TypeShip.used
                         })
                     } else {
                         await db.TypeShip.destroy({
@@ -157,13 +157,13 @@ let deleteTypeShip = (data) => {
                         })
                         resolve({
                             errCode: 0,
-                            errMessage: 'Xoá phương thức vận chuyển thành công!'
+                            errMessage: Message.TypeShip.dlt
                         })
                     }
                 } else {
                     resolve({
                         errCode: 2,
-                        errMessage: 'Không tìm thấy phương thức vận chuyển!'
+                        errMessage: Message.TypeShip.errCode2
                     })
                 }
             }

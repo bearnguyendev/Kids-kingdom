@@ -4,6 +4,7 @@ require('dotenv').config();
 import { v4 as uuidv4 } from 'uuid';
 import paypal from 'paypal-rest-sdk'
 import axios from 'axios';
+import { Message } from "../config/message";
 const vnpay = require('vn-payments');
 import initiatePayment from "./MomoPayMent"
 //const vnpay = require('vnpay');
@@ -18,7 +19,7 @@ let createNewOrder = (data) => {
             if (!data.receiverId || !data.typeShipId) {
                 resolve({
                     errCode: 1,
-                    errMessage: 'Thiếu các thông số bắt buộc!'
+                    errMessage: Message.errCode1
                 })
             } else {
                 let product = await db.OrderProduct.create({
@@ -69,7 +70,7 @@ let createNewOrder = (data) => {
                 }
                 resolve({
                     errCode: 0,
-                    errMessage: 'Đặt hàng thành công!'
+                    errMessage: Message.Order.success
                 })
             }
         } catch (error) {
@@ -123,7 +124,7 @@ let getDetailOrderById = (id) => {
             if (!id) {
                 resolve({
                     errCode: 1,
-                    errMessage: 'Thiếu các thông số bắt buộc!'
+                    errMessage: Message.errCode1
                 })
             } else {
                 let order = await db.OrderProduct.findOne({
@@ -180,7 +181,7 @@ let updateStatusOrder = (data) => {
             if (!data.id || !data.statusId) {
                 resolve({
                     errCode: 1,
-                    errMessage: 'Thiếu các thông số bắt buộc!'
+                    errMessage: Message.errCode1
                 })
             } else {
                 let order = await db.OrderProduct.findOne({
@@ -230,12 +231,12 @@ let updateStatusOrder = (data) => {
                     // }
                     resolve({
                         errCode: 0,
-                        errMessage: 'Huỷ đơn hàng thành công!'
+                        errMessage: Message.Order.cancel
                     })
                 }
                 resolve({
                     errCode: 0,
-                    errMessage: 'ok'
+                    errMessage: Message.Order.ok
                 })
             }
         } catch (error) {
@@ -249,7 +250,7 @@ let getAllOrdersByUserId = (userId) => {
             if (!userId) {
                 resolve({
                     errCode: 1,
-                    errMessage: 'Thiếu các thông số bắt buộc!'
+                    errMessage: Message.errCode1
                 })
             } else {
                 let receiver = await db.Receiver.findAll({
@@ -308,7 +309,7 @@ let paymentVNPayOrder = (data) => {
             if (!data.id || !data.statusId) {
                 resolve({
                     errCode: 1,
-                    errMessage: 'Thiếu các thông số bắt buộc!'
+                    errMessage: Message.errCode1
                 })
             } else {
                 const orderInfo = req.body.orderInfo;
@@ -429,10 +430,25 @@ let paymentVNPayOrder = (data) => {
 let paymentMomoOrder = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const res = await initiatePayment(data)
-            resolve({
-                res
-            })
+            if (!data.orderId || !data.amount || !data.orderInfo) {
+                resolve({
+                    errCode: 1,
+                    errMessage: Message.errCode1
+                })
+            } else {
+                const res = await initiatePayment(data)
+                if (res) {
+                    resolve({
+                        res
+                    })
+                } else {
+                    resolve({
+                        errCode: 3,
+                        errMessage: Message.Order.paymentFail
+                    })
+                }
+
+            }
         } catch (error) {
             reject(error)
         }
@@ -445,7 +461,7 @@ let paymentPayPalOrder = (data) => {
             if (!data) {
                 resolve({
                     errCode: 1,
-                    errMessage: 'Thiếu các thông số bắt buộc!'
+                    errMessage: Message.errCode1
                 })
             } else {
                 console.log(data.totalPayment);
@@ -480,7 +496,7 @@ let paymentPayPalOrder = (data) => {
                         console.log("Create Payment Response");
                         resolve({
                             errCode: 0,
-                            errMessage: 'ok',
+                            errMessage: Message.Order.ok,
                             // link: payment.links[1].href
                             link: payment.links.find((link) => link.rel === 'approval_url').href
                         })
@@ -500,7 +516,7 @@ let paymentPayPalSuccess = (data) => {
             if (!data.PayerID || !data.paymentId || !data.token) {
                 resolve({
                     errCode: 1,
-                    errMessage: 'Thiếu các thông số bắt buộc!'
+                    errMessage: Message.errCode1
                 })
             } else {
                 var execute_payment_json = {
@@ -526,7 +542,14 @@ let paymentPayPalSuccess = (data) => {
                     } else {
                         console.log("Get Payment Response");
                         let res = await createNewOrder(data.orderData)
-                        resolve(res)
+                        if (res) {
+                            resolve(res)
+                        } else {
+                            resolve({
+                                errCode: 3,
+                                errMessage: Message.Order.paymentFail
+                            })
+                        }
                         // let product = await db.OrderProduct.create({
                         //     orderDate: data.orderDate,
                         //     receiverId: data.receiverId,

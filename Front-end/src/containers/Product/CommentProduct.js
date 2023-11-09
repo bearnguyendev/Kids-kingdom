@@ -321,7 +321,7 @@ class CommentProduct extends Component {
                         onCloseRequest={() => this.setState({ isOpen: false })}
                     />
                 }
-                <div className='text-lg font-weight-bold font-italic'>Bình luận qua facebook</div>
+                {/* <div className='text-lg font-weight-bold font-italic'>Bình luận qua facebook</div> */}
                 <CommentModal
                     isOpen={isOpenModal}
                     toggleFromParent={this.toggleCommentModal}
