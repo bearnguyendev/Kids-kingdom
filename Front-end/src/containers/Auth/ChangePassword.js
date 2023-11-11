@@ -60,13 +60,13 @@ class ChangePassword extends Component {
                     newPassword: this.state.newPassword
                 })
                 if (data && data.errCode !== 0) {
-                    toast.error("Đổi mật khẩu thất bại!")
+                    toast.error(<FormattedMessage id={"auth.pw-fail"} />)
                     this.setState({
                         errMessage: data.errMessage
                     })
                 }
                 if (data && data.errCode === 0) {
-                    toast.success("Đổi mật khẩu thành công!")
+                    toast.success(<FormattedMessage id={"auth.pw-success"} />)
                     this.setState({
                         oldPassword: "",
                         newPassword: "",

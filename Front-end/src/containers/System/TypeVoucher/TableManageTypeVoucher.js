@@ -36,7 +36,7 @@ class TableManageTypeVoucher extends Component {
                 toast.error(res.errMessage)
             }
         } catch (error) {
-            toast.error("Thao tác thất bại! Vui lòng thử lại sau.")
+            toast.error(<FormattedMessage id={"error"} />)
             if (error.response) {
                 if (error.response.data) {
                     this.setState({

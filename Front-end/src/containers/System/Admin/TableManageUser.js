@@ -74,7 +74,7 @@ class TableManageUser extends Component {
                     })
                 }
             }
-            toast.error("Thao tác thất bại! Vui lòng thử lại sau.")
+            toast.error(<FormattedMessage id={"error"} />)
         }
     }
     buildDataExport = (data) => {

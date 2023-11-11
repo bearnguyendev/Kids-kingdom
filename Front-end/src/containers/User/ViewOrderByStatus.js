@@ -52,7 +52,7 @@ class OrderUser extends Component {
                 dataOrderUser: data
             })
             if (res && res.errCode === 0) {
-                toast.success("Đã nhận đơn hàng")
+                toast.success(<FormattedMessage id={"user.received-order"} />)
                 let { userId } = this.props;
                 if (userId) {
                     this.props.getAllOrderByUserIdRedux(userId)

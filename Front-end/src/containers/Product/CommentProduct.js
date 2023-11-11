@@ -98,12 +98,12 @@ class CommentProduct extends Component {
             let { activeStar, content, image } = this.state
             let { productId, userInfo } = this.props
             if (!activeStar && !content) {
-                toast.error("Không được để trống nội dung và số sao!")
+                toast.error(<FormattedMessage id={"comment.no-data"} />)
                 this.props.fetchAllCommentByProductIdRedux(productId)
                 return;
             }
-            if (!activeStar) toast.error("Bạn chưa chọn sao !")
-            else if (!content) toast.error("Nội dung không được để trống !")
+            if (!activeStar) toast.error(<FormattedMessage id={"comment.no-star"} />)
+            else if (!content) toast.error(<FormattedMessage id={"comment.no-content"} />)
             else {
                 let response = await createNewCommentService({
                     productId: productId,
@@ -113,7 +113,7 @@ class CommentProduct extends Component {
                     star: activeStar
                 })
                 if (response && response.errCode === 0) {
-                    toast.success("Đăng đánh giá thành công !")
+                    toast.success(<FormattedMessage id={"comment.cmt-success"} />)
                     this.props.fetchAllCommentByProductIdRedux(productId)
                 } else {
                     toast.error(response.errMessage)
@@ -146,11 +146,11 @@ class CommentProduct extends Component {
                 parentId: parentId
             })
             if (res && res.errCode === 0) {
-                toast.success("Phản hồi thành công !");
+                toast.success(<FormattedMessage id={"comment.reply-success"} />);
                 this.props.fetchAllCommentByProductIdRedux(productId)
                 emitter.emit('EVENT_CLEAR_MODAL_DATA')
             } else {
-                toast.success("Phản hồi thất bại !");
+                toast.success(<FormattedMessage id={"comment.reply-fail"} />);
             }
         } catch (error) {
             console.log(error);
@@ -161,7 +161,7 @@ class CommentProduct extends Component {
             let { productId } = this.props
             let res = await deleteCommentService(id)
             if (res && res.errCode === 0) {
-                toast.success("Xóa phản hồi thành công !")
+                toast.success(<FormattedMessage id={"comment.dlt-reply"} />)
                 this.props.fetchAllCommentByProductIdRedux(productId)
             } else {
                 toast.error(res.errMessage)

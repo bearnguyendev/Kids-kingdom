@@ -25,7 +25,7 @@ class PaymentOrder extends Component {
             statusId: 'S4'
         })
         if (res && res.errCode === 0) {
-            toast.success("Xác nhận đơn hàng thành công")
+            toast.success(<FormattedMessage id={"order.accept-order"} />)
             let orderId = this.props.id && this.props.id
             this.props.fetchDetailOrderById(orderId)
         }
@@ -36,7 +36,7 @@ class PaymentOrder extends Component {
             statusId: 'S5'
         })
         if (res && res.errCode === 0) {
-            toast.success("Xác nhận lấy hàng thành công")
+            toast.success(<FormattedMessage id={"order.get-products"} />)
             let orderId = this.props.id && this.props.id
             this.props.fetchDetailOrderById(orderId)
         }
@@ -47,7 +47,7 @@ class PaymentOrder extends Component {
             statusId: 'S6'
         })
         if (res && res.errCode === 0) {
-            toast.success("Xác nhận đang giao hàng")
+            toast.success(<FormattedMessage id={"order.send-product"} />)
             let orderId = this.props.id && this.props.id
             this.props.fetchDetailOrderById(orderId)
         }
@@ -60,7 +60,7 @@ class PaymentOrder extends Component {
             orderDateSuccess: Date.now()
         })
         if (res && res.errCode === 0) {
-            toast.success("Đã giao hàng thành công")
+            toast.success(<FormattedMessage id={"order.success-ship"} />)
             let orderId = this.props.id && this.props.id
             this.props.fetchDetailOrderById(orderId)
         }
@@ -73,7 +73,7 @@ class PaymentOrder extends Component {
                 dataOrderUser: data
             })
             if (res && res.errCode === 0) {
-                toast.success("Hủy đơn hàng thành công")
+                toast.success(<FormattedMessage id={"order.cancel"} />)
                 let orderId = this.props.id && this.props.id
                 this.props.fetchDetailOrderById(orderId)
                 setTimeout(() => {

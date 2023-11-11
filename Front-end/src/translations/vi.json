@@ -43,7 +43,11 @@
         "gender": "Giới tính",
         "choose-gender": "Chọn giới tính",
         "address": "Địa chỉ",
-        "birthday": "Ngày sinh"
+        "birthday": "Ngày sinh",
+        "pw-success": "Đổi mật khẩu thành công!",
+        "pw-fail": "Đổi mật khẩu thất bại!",
+        "new-pw-success": "Cập nhật mật khẩu mới thành công!",
+        "create-account": "Tạo tài khoản thành công!"
     },
     "menu": {
         "admin": {
@@ -99,7 +103,9 @@
         "update": "Chỉnh sửa danh mục",
         "add": "Thêm mới danh mục",
         "save": "Lưu danh mục",
-        "edit": "Lưu thay đổi"
+        "edit": "Lưu thay đổi",
+        "add-category": "Thêm danh mục thành công!",
+        "up-category": "Chỉnh sửa danh mục thành công!"
     },
     "manage-brand":{
         "title":"Quản lý thương hiệu sản phẩm",
@@ -109,7 +115,9 @@
         "update": "Chỉnh sửa thương hiệu",
         "add": "Thêm mới thương hiệu",
         "save": "Lưu thương hiệu",
-        "edit": "Lưu thay đổi"
+        "edit": "Lưu thay đổi",
+        "add-brand": "Thêm thương hiệu thành công!",
+        "up-brand": "Chỉnh sửa thương hiệu thành công!"
     },
     "manage-product":{
         "title-add": "Thêm mới sản phẩm",
@@ -171,7 +179,8 @@
         "edit": "Lưu thay đổi",
         "update":"Chỉnh sửa biểu ngữ",
         "status":"Trạng thái",
-        "action":"Hành động"
+        "action":"Hành động",
+        "fail-add": "Thêm mới biểu ngữ thất bại! Vui lòng thử lại sau."
     },
     "manage-subject":{
         "title":"Quản lý chủ  đề ",
@@ -181,7 +190,9 @@
         "update": "Chỉnh sửa chủ  đề",
         "add": "Thêm mới chủ  đề",
         "save": "Lưu chủ  đề",
-        "edit": "Lưu thay đổi"
+        "edit": "Lưu thay đổi",
+        "add-subject": "Thêm chủ đề thành công!",
+        "up-subject": "Chỉnh sửa chủ đề thành công!"
     },
     "manage-type-ship":{
         "title":"Quản lý phương thức vận chuyển ",
@@ -193,7 +204,9 @@
         "save": "Lưu phương thức vận chuyển ",
         "edit": "Lưu thay đổi",
         "action":"Hành động",
-        "no-data": "Không có phương thức vận chuyển nào để hiển thị!"
+        "no-data": "Không có phương thức vận chuyển nào để hiển thị!",
+        "add-type-ship": "Thêm phương thức vận chuyển thành công!",
+        "up-type-ship": "Chỉnh sửa phương thức vận chuyển thành công!"
     },
     "manage-blog":{
         "title-manage":"Quản lý bài đăng",
@@ -266,7 +279,8 @@
         "no-voucher": "Người đặt không sử dụng mã giảm giá",
         "no-note-user": "Bạn không ghi chú",
         "no-voucher-user": "Bạn không sử dụng mã giảm giá", 
-        "payment" :"Thanh toán"
+        "payment" :"Thanh toán",
+        "no-data-export-excel": "Không có đơn hàng nào trong trạng thái đơn hàng được chọn để xuất file!"
     },
     "manage-import":{
         "title":"Quản lý nhập hàng",
@@ -283,14 +297,24 @@
         "name": "Tên sản phẩm",
         "date": "Ngày nhập",
         "err-quantity": "Số lượng nhập hàng tối thiểu là 1",
-        "no-data":"Chưa có dữ liệu!"
+        "no-data":"Chưa có dữ liệu!",
+        "choose-time": "Vui lòng chọn thời gian xuất các phiếu nhập!"
     },
     "home-page":{
         "about": "Truyền thông nói về KidsKingdom",
         "top-product": "Sản phẩm nổi bật",
         "new-product": "Sản phẩm mới",
         "blog": "Bài đăng",
-        "more-infor": "Xem thêm"
+        "more-infor": "Xem thêm",
+        "no-name-blog": "Bạn chưa nhập tên bài đăng!",
+        "a-z": "Đang sắp xếp theo tên A->Z",
+        "z-a": "Đang sắp xếp theo tên Z->A",
+        "percent-asc": "Đang sắp xếp theo phần trăm giảm giá tăng dần",
+        "percent-desc": "Đang sắp xếp theo phần trăm giảm giá giảm dần",
+        "price-asc": "Đang sắp xếp theo giá tăng dần",
+        "price-desc": "Đang sắp xếp theo giá giảm dần",
+        "no-name-product": "Bạn chưa nhập tên sản phẩm!",
+        "fail-login": "Vui lòng đăng nhập trước khi thêm sản phẩm vào giỏ hàng! "
     },
     "receiver":{
         "add":"Thêm mới địa chỉ nhận hàng",
@@ -349,7 +373,14 @@
         "paid": "Đã thanh toán Online",
         "unpaid": "Thanh toán khi nhận hàng",
         "payment-momo": "Thanh toán Momo",
-        "write-cmt": "Viết đánh giá của bạn"
+        "write-cmt": "Viết đánh giá của bạn",
+        "accept-order": "Xác nhận đơn hàng thành công",
+        "get-products": "Xác nhận lấy hàng thành công",
+        "send-product": "Xác nhận đang giao hàng",
+        "success-ship": "Đã giao hàng thành công",
+        "cancel": "Hủy đơn hàng thành công",
+        "no-product": "Không có sản phẩm. Không thể tiến hành đặt hàng!",
+        "no-type-ship": "Chưa chọn đơn vị vận chuyển!"
     },
     "voucher":{
         "choose-voucher": "Chọn mã giảm giá",
@@ -361,7 +392,8 @@
         "used": "Dùng ngay",
         "login-to-save": "Bạn cần đăng nhập để có thể lưu mã giảm giá này!",
         "used-voucher": "Đã dùng ",
-        "sale": "Giảm"
+        "sale": "Giảm",
+        "no-voucher": "Không tìm thấy mã giảm giá bạn vừa nhập. Vui lòng thử lại!"
     },
     "cart":{
         "title": "Giỏ hàng",
@@ -374,7 +406,10 @@
         "no-price-ship": "Giá chưa bao gồm phí vận chuyển",
         "product":"sản phẩm",
         "delete-cart": "Xoá giỏ hàng",
-        "payment": "Thanh toán"
+        "payment": "Thanh toán",
+        "no-cart": "Giỏ hàng rỗng!",
+        "no-cart-payment": "Giỏ hàng rỗng không thể tiến hành thanh toán!",
+        "check-mail": "Vui lòng kiểm tra email để xác thực email trước khi đặt hàng!"
     },
     "user":{
         "detail": "Hồ sơ của tôi",
@@ -419,17 +454,28 @@
         },
         "no-data-voucher":"Bạn chưa lưu mã giảm giá nào hoặc mã giảm giá đã hết hạn!",
         "no-data-order": "Bạn chưa đặt hàng sản phẩm nào!",
-        "no-data-address": "Bạn chưa tạo địa chỉ nhận hàng nào!"
+        "no-data-address": "Bạn chưa tạo địa chỉ nhận hàng nào!",
+        "received-order": "Đã nhận đơn hàng",
+        "fail-change-pw": "Đổi mật khẩu thất bại!",
+        "success-change-pw": "Đổi mật khẩu thành công!",
+        "check-mail": "Vui lòng kiểm tra email để hoàn tất quá trình xác thực email!"
     },
     "comment":{
         "reply-comment": "Viết phản hồi đánh giá sản phẩm",
         "content": "Phản hồi",
         "save": "Lưu",
-        "close":"Đóng"
+        "close":"Đóng",
+        "no-content": "Nội dung không được để trống!",
+        "no-data": "Không được để trống nội dung và số sao!",
+        "no-star": "Bạn chưa chọn sao!",
+        "cmt-success": "Đăng đánh giá thành công !",
+        "reply-success": "Phản hồi thành công !",
+        "reply-fail": "Phản hồi thất bại !",
+        "dlt-reply": "Xoá phản hồi thành công!"
     },
     "detail-product":{
         "no-data": "Chưa có dữ liệu!"
     },
-    "error": "Thao tác thất bại! Vui lòng thử lại sau."
-
+    "error": "Thao tác thất bại! Vui lòng thử lại sau.",
+    "required-field": "Đây là trường bắt buộc: "
 }

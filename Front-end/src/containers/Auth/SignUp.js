@@ -82,7 +82,7 @@ class SignUp extends Component {
                 })
             }
             if (data && data.errCode === 0) {
-                toast.success("Tạo tài khoản thành công!");
+                toast.success(<FormattedMessage id={"auth.create-account"} />);
                 this.setState({
                     email: "",
                     password: "",
@@ -117,7 +117,7 @@ class SignUp extends Component {
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
-                toast.error('Thông tin đầu vào này là bắt buộc: ' + arrCheck[i])
+                toast.error(<FormattedMessage id={"required-field"} /> + arrCheck[i])
                 break;
             }
         }

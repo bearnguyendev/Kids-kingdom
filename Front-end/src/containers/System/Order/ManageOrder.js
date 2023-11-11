@@ -55,7 +55,7 @@ class ManageOrder extends Component {
 
         let { dataExport } = this.state
         if (!dataExport) {
-            toast.error("Không có đơn hàng nào trong trạng thái đơn hàng được chọn để xuất file!")
+            toast.error(<FormattedMessage id={"manage-order.no-data-export-excel"} />)
         } else {
             let nameFile = `ListOrder-${new Date().getTime()}`
             await CommonUtils.exportExcel(dataExport, "Danh sách đặt hàng", nameFile)

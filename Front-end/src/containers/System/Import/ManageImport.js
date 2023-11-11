@@ -173,7 +173,7 @@ class ManageImport extends Component {
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
-                toast.error('Đây là trường bắt buộc: ' + arrCheck[i])
+                toast.error(<FormattedMessage id={"required-field"} /> + arrCheck[i])
                 break;
             }
         }
@@ -242,7 +242,7 @@ class ManageImport extends Component {
             await CommonUtils.exportExcel(dataExport, "Danh sách nhập hàng", nameFile)
         }
         else {
-            toast.error("Vui lòng chọn thời gian xuất các phiếu nhập!")
+            toast.error(<FormattedMessage id={"manage-import.choose-time"} />)
         }
     }
     render() {

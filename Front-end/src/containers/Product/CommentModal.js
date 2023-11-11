@@ -40,7 +40,7 @@ class CommentModal extends Component {
         if (this.state.content) {
             this.props.sendDataFromModalComment(this.state.content)
         } else {
-            toast.error("Nội dung không được để trống!")
+            toast.error(<FormattedMessage id={"comment.no-content"} />)
         }
     }
     render() {

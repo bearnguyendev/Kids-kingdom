@@ -100,7 +100,7 @@ class DetailProduct extends Component {
             let { dataProduct } = this.state
             let { userInfo } = this.props
             if (!userInfo) {
-                toast.error("Vui lòng đăng nhập trước khi thêm sản phẩm vào giỏ hàng! ")
+                toast.error(<FormattedMessage id={"home-page.fail-login"} />)
             } else {
                 this.props.fetchAddItemCart({
                     userId: userInfo.id,

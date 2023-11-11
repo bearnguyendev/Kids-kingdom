@@ -1,6 +1,7 @@
 import actionTypes from './actionTypes';
 import { getAllCodeService, createANewUser, deleteUserService, editUserService, getAllUsers, getAllProducts, deleteProductService, getAllProductImageFromProductService, getAllBanners, getAllTypeShips, getAllBlogs, getAllTypeVouchers, getAllVouchers, getTopProductHomePage, getListBanners, getListBlogs, getAllReceiverByUserIdService, getAllVoucherByUserId, getDetailUserById, getAllOrderByUserIdService, getAllOrderService, getDetailOrderByIdService, getAllCommentByProductIdService, getAllImports } from "../../services/userService";
 import { toast } from 'react-toastify'
+import { FormattedMessage } from 'react-intl';
 export const fetchAllcodeGenders = () => {
     return async (dispatch, getState) => {
         try {
@@ -222,7 +223,7 @@ export const createNewUser = (data) => {
                 dispatch(saveUserFailed())
             }
         } catch (error) {
-            toast.error("Đã có lỗi xảy ra, vui lòng thử lại sau!")
+            toast.error(<FormattedMessage id={"error"} />)
             dispatch(saveUserFailed())
             console.log("saveUserFailed error: ", error);
         }

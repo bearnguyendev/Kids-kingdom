@@ -168,7 +168,7 @@ class CategoryPage extends Component {
                 sortName: value === 0 ? true : false,
                 valueSearch: this.state.valueSearch
             })
-            value === 0 ? toast.success("Đang sắp xếp theo tên A->Z") : toast.success("Đang sắp xếp theo tên Z->A")
+            value === 0 ? toast.success(<FormattedMessage id={"home-page.a-z"} />) : toast.success(<FormattedMessage id={"home-page.z-a"} />)
 
         }
         if (type === "sortPercent") {
@@ -183,7 +183,7 @@ class CategoryPage extends Component {
                 sortPercent: value === 0 ? true : false,
                 valueSearch: this.state.valueSearch
             })
-            value === 0 ? toast.success("Đang sắp xếp theo phần trăm giảm giá tăng dần") : toast.success("Đang sắp xếp theo phần trăm giảm giá giảm dần")
+            value === 0 ? toast.success(<FormattedMessage id={"home-page.percent-asc"} />) : toast.success(<FormattedMessage id={"home-page.percent-desc"} />)
         }
         if (type === "sortPrice") {
             this.setState({
@@ -197,7 +197,7 @@ class CategoryPage extends Component {
                 sortPrice: value === 0 ? true : false,
                 valueSearch: this.state.valueSearch
             })
-            value === 0 ? toast.success("Đang sắp xếp theo giá tăng dần") : toast.success("Đang sắp xếp theo giá giảm dần")
+            value === 0 ? toast.success(<FormattedMessage id={"home-page.price-asc"} />) : toast.success(<FormattedMessage id={"home-page.price-desc"} />)
         }
         if (type === "sortView") {
             this.setState({
@@ -267,7 +267,7 @@ class CategoryPage extends Component {
         try {
             let { valueSearch } = this.state
             if (valueSearch === '') {
-                toast.error("Bạn chưa nhập tên sản phẩm!")
+                toast.error(<FormattedMessage id={"home-page.no-name-product"} />)
             } else {
                 this.setState({
                     isSelectedSortCreatedAt: 0,

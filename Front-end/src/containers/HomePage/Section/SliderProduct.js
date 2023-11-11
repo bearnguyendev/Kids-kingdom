@@ -27,7 +27,7 @@ class SliderProduct extends Component {
     handleAddCart(item, userInfo) {
         try {
             if (!userInfo) {
-                toast.error("Vui lòng đăng nhập trước khi thêm sản phẩm vào giỏ hàng! ")
+                toast.error(<FormattedMessage id={"home-page.fail-login"} />)
             } else {
                 this.props.fetchAddItemCart({
                     userId: userInfo.id,

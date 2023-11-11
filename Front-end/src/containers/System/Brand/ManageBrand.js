@@ -46,7 +46,7 @@ class ManageBrand extends Component {
                     value: this.state.value,
                 })
                 if (res && res.errCode === 0) {
-                    toast.success("Thêm thương hiệu thành công!");
+                    toast.success(<FormattedMessage id={"manage-brand.add-brand"} />);
                     this.props.fetchAllcodeBrands();
                 } else {
                     toast.error(res.errMessage)
@@ -60,7 +60,7 @@ class ManageBrand extends Component {
                     value: value,
                 })
                 if (res && res.errCode === 0) {
-                    toast.success("Chỉnh sửa thương hiệu thành công!");
+                    toast.success(<FormattedMessage id={"manage-brand.up-brand"} />);
                     this.props.fetchAllcodeBrands();
                 } else {
                     toast.error(res.errMessage)
@@ -73,7 +73,7 @@ class ManageBrand extends Component {
                 }
             }
         } catch (error) {
-            toast.error("Thao tác thất bại! Vui lòng thử lại sau.")
+            toast.error(<FormattedMessage id={"error"} />)
         }
     }
     checkValidateInput = () => {
@@ -82,7 +82,7 @@ class ManageBrand extends Component {
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
-                toast.error('Đây là trường bắt buộc: ' + arrCheck[i])
+                toast.error(<FormattedMessage id={"required-field"} /> + arrCheck[i])
                 break;
             }
         }

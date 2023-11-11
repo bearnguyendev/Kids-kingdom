@@ -139,10 +139,10 @@ class Order extends Component {
     handleOrder = async (totalPriceDiscount) => {
         let { selectedTypeShip, dataItemOfCart, receiverId, selectedVoucher, note, isPaymentOnl, isPaymentSelect } = this.state
         if (dataItemOfCart.ProductUserCartData.length <= 0) {
-            toast.error("Không có sản phẩm. Không thể tiến hành đặt hàng!")
+            toast.error(<FormattedMessage id={"order.no-product"} />)
         } else {
             if (!selectedTypeShip) {
-                toast.error("Chưa chọn đơn vị vận chuyển!")
+                toast.error(<FormattedMessage id={"order.no-type-ship"} />)
             } else {
                 let result = [];
                 dataItemOfCart.ProductUserCartData.map((item, index) => {

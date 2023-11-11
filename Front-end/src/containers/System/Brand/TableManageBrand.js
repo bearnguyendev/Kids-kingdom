@@ -40,7 +40,7 @@ class TableManageBrand extends Component {
                 toast.error(res.errMessage)
             }
         } catch (error) {
-            toast.error("Thao tác thất bại! Vui lòng thử lại sau.")
+            toast.error(<FormattedMessage id={"error"} />)
         }
 
     }
@@ -69,7 +69,7 @@ class TableManageBrand extends Component {
                     })
                 }
             }
-            toast.error("Thao tác thất bại! Vui lòng thử lại sau.")
+            toast.error(<FormattedMessage id={"error"} />)
         }
     }
     render() {

@@ -143,7 +143,7 @@ class Cart extends Component {
     handleDeleteCart = async (userId, itemCart) => {
         try {
             if (itemCart.length <= 0) {
-                toast.error("Giỏ hàng rỗng!")
+                toast.error(<FormattedMessage id={"cart.no-cart"} />)
             } else {
                 let res = await deleteItemCartByUserIdService(userId)
                 if (res && res.errCode === 0) {
@@ -159,7 +159,7 @@ class Cart extends Component {
     }
     handleOrder = async (itemCart) => {
         if (itemCart.length <= 0) {
-            toast.error("Giỏ hàng rỗng không thể tiến hành thanh toán!")
+            toast.error(<FormattedMessage id={"cart.no-cart-payment"} />)
         } else {
             this.setState({
                 isShowLoading: true
@@ -175,9 +175,9 @@ class Cart extends Component {
                         isShowLoading: false
                     })
                     if (res && res.errCode === 0) {
-                        toast.error("Vui lòng kiểm tra email để xác thực email trước khi đặt hàng!")
+                        toast.error(<FormattedMessage id={"cart.check-mail"} />)
                     } else {
-                        toast.error("Đã có lỗi xảy ra, vui lòng thử lại sau!")
+                        toast.error(<FormattedMessage id={"error"} />)
                     }
                 }
             } else {

@@ -28,9 +28,9 @@ class AvatarUser extends Component {
                 isShowLoading: false
             })
             if (res && res.errCode === 0) {
-                toast.success("Vui lòng kiểm tra email để hoàn tất quá trình xác thực email!")
+                toast.success(<FormattedMessage id={"user.check-mail"} />)
             } else {
-                toast.error("Đã có lỗi xảy ra, vui lòng thử lại sau!")
+                toast.error(<FormattedMessage id={"error"} />)
             }
         } catch (error) {
             console.log(error);

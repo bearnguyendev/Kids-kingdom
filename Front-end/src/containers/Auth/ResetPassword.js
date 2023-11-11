@@ -46,7 +46,7 @@ class ResetPassword extends Component {
                     })
                 }
                 if (res && res.errCode === 0) {
-                    toast.success("Cập nhật mật khẩu mới thành công!");
+                    toast.success(<FormattedMessage id={"auth.new-pw-success"} />);
                     setTimeout(() => {
                         this.setState({
                             statusVerify: true,

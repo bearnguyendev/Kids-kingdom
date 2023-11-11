@@ -79,13 +79,13 @@ class ChangePasswordUser extends Component {
                     newPassword: this.state.newPassword
                 })
                 if (data && +data.errCode !== 0) {
-                    toast.error("Đổi mật khẩu thất bại!")
+                    toast.error(<FormattedMessage id={"user.fail-change-pw"} />)
                     this.setState({
                         errMessage: data.errMessage
                     })
                 }
                 if (data && +data.errCode === 0) {
-                    toast.success("Đổi mật khẩu thành công!")
+                    toast.success(<FormattedMessage id={"user.success-change-pw"} />)
                     emitter.emit('EVENT_CLEAR_INPUT')
                 }
             }

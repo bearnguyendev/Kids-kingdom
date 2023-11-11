@@ -55,7 +55,7 @@ class ManageTypeShip extends Component {
                     price: price,
                 })
                 if (res && res.errCode === 0) {
-                    toast.success("Thêm phương thức vận chuyển thành công!");
+                    toast.success(<FormattedMessage id={"manage-type-ship.add-type-ship"} />);
                     this.props.fetchAllTypeShips();
                 } else {
                     toast.error(res.errMessage)
@@ -69,7 +69,7 @@ class ManageTypeShip extends Component {
                     price: price,
                 })
                 if (res && res.errCode === 0) {
-                    toast.success("Chỉnh sửa phương thức vận chuyển thành công!");
+                    toast.success(<FormattedMessage id={"manage-type-ship.up-type-ship"} />);
                     this.props.fetchAllTypeShips();
                 } else {
                     toast.error(res.errMessage)
@@ -77,7 +77,7 @@ class ManageTypeShip extends Component {
                 }
             }
         } catch (error) {
-            toast.error("Thao tác thất bại! Vui lòng thử lại sau.")
+            toast.error(<FormattedMessage id={"error"} />)
         }
     }
     checkValidateInput = () => {
@@ -86,7 +86,7 @@ class ManageTypeShip extends Component {
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
-                toast.error('Đây là trường bắt buộc: ' + arrCheck[i])
+                toast.error(<FormattedMessage id={"required-field"} /> + arrCheck[i])
                 break;
             }
         }

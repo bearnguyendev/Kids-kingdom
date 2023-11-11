@@ -64,7 +64,7 @@ class VoucherModal extends Component {
             return item && item.codeVoucher === codeVoucher
         })
         if (!findVoucher) {
-            toast.error("Không tìm thấy mã giảm giá bạn vừa nhập. Vui lòng thử lại!")
+            toast.error(<FormattedMessage id={"voucher.no-voucher"} />)
             this.setState({
                 codeVoucher: ''
             })

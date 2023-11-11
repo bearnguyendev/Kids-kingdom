@@ -149,7 +149,7 @@ class ManageUser extends Component {
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
-                toast.error('Đây là trường bắt buộc: ' + arrCheck[i])
+                toast.error(<FormattedMessage id={"required-field"} /> + arrCheck[i])
                 break;
             }
         }

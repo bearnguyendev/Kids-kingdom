@@ -110,7 +110,7 @@ class ListBlogs extends Component {
         try {
             let { valueSearch } = this.state
             if (valueSearch === '' || valueSearch === 'ALL') {
-                toast.error("Bạn chưa nhập tên bài đăng!")
+                toast.error(<FormattedMessage id={"home-page.no-name-blog"} />)
             } else {
                 this.props.fetchAllBlogs({
                     statusId: "S1",
