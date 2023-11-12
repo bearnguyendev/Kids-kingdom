@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { CRUD_ACTIONS } from '../../../utils';
+import { CRUD_ACTIONS, requiredField } from '../../../utils';
 import * as actions from "../../../store/actions";
 import { editAllCodeService, createANewAllCode } from '../../../services/userService';
 import TableManageCategory from "./TableManageCategory";
@@ -82,7 +82,7 @@ class ManageCategory extends Component {
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
-                toast.error(<FormattedMessage id={"required-field"} /> + arrCheck[i])
+                toast.error(requiredField + arrCheck[i])
                 break;
             }
         }

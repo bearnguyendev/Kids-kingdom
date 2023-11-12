@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import { withRouter } from 'react-router';
 import * as actions from "../../../store/actions"
 import { toast } from 'react-toastify';
+import { path } from '../../../utils';
 class SliderProduct extends Component {
     constructor(props) {
         super(props)
@@ -28,6 +29,9 @@ class SliderProduct extends Component {
         try {
             if (!userInfo) {
                 toast.error(<FormattedMessage id={"home-page.fail-login"} />)
+                setTimeout(() => {
+                    window.location.href = path.LOGIN
+                }, 3000)
             } else {
                 this.props.fetchAddItemCart({
                     userId: userInfo.id,

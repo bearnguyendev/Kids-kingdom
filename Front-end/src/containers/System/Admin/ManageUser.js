@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { CRUD_ACTIONS, CommonUtils } from '../../../utils';
+import { CRUD_ACTIONS, CommonUtils, requiredField } from '../../../utils';
 import "./ManageUser.scss";
 import * as actions from "../../../store/actions";
 import TableManageUser from "./TableManageUser";
@@ -149,7 +149,7 @@ class ManageUser extends Component {
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
-                toast.error(<FormattedMessage id={"required-field"} /> + arrCheck[i])
+                toast.error(requiredField + arrCheck[i])
                 break;
             }
         }

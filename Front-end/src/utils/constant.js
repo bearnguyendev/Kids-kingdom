@@ -76,3 +76,4 @@ export const USER_ROLE = {
 }
 export const LIMIT = 10;
 export const LIMIT5 = 5;
+export const requiredField = "Đây là trường bắt buộc: "

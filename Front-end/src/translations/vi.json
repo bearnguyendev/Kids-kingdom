@@ -469,13 +469,13 @@
         "no-data": "Không được để trống nội dung và số sao!",
         "no-star": "Bạn chưa chọn sao!",
         "cmt-success": "Đăng đánh giá thành công !",
-        "reply-success": "Phản hồi thành công !",
-        "reply-fail": "Phản hồi thất bại !",
+        "reply-success": "Phản hồi thành công!",
+        "reply-fail": "Phản hồi thất bại!",
         "dlt-reply": "Xoá phản hồi thành công!"
     },
     "detail-product":{
         "no-data": "Chưa có dữ liệu!"
     },
-    "error": "Thao tác thất bại! Vui lòng thử lại sau.",
-    "required-field": "Đây là trường bắt buộc: "
+    "error": "Thao tác thất bại! Vui lòng thử lại sau."
+    
 }

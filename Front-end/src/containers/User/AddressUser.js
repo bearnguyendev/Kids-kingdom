@@ -6,6 +6,7 @@ import { createNewReceiverService, deleteReceiverService, editReceiverService, h
 import * as actions from "../../store/actions";
 import { emitter } from '../../utils/emitter';
 import ReceiverModal from '../Cart/ReceiverModal';
+import { requiredField } from '../../utils';
 class AddressUser extends Component {
 
     constructor(props) {
@@ -56,7 +57,7 @@ class AddressUser extends Component {
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
-                toast.error(<FormattedMessage id={"required-field"} /> + arrCheck[i])
+                toast.error(requiredField + arrCheck[i])
                 break;
             }
         }

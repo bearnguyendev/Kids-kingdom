@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import Select from "react-select";
 import { toast } from "react-toastify";
 import { Redirect } from 'react-router'
+import { requiredField } from "../../utils";
 class SignUp extends Component {
     constructor(props) {
         super(props);
@@ -117,7 +118,7 @@ class SignUp extends Component {
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
-                toast.error(<FormattedMessage id={"required-field"} /> + arrCheck[i])
+                toast.error(requiredField + arrCheck[i])
                 break;
             }
         }

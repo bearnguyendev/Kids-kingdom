@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { emitter } from '../../utils/emitter';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import * as actions from "../../store/actions";
-import { CommonUtils } from '../../utils';
+import { CommonUtils, requiredField } from '../../utils';
 import { toast } from 'react-toastify';
 class ReceiverModal extends Component {
 
@@ -49,7 +49,7 @@ class ReceiverModal extends Component {
         for (let i = 0; i < arrInput.length; i++) {
             if (!this.state[arrInput[i]]) {
                 isValid = false;
-                toast.error(<FormattedMessage id={"required-field"} /> + arrInput[i])
+                toast.error(requiredField + arrInput[i])
                 break;
             }
         }
